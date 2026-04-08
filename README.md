@@ -70,32 +70,12 @@ O script de criação do banco será disponibilizado na pasta do projeto.
 
 ## 👥 Integrantes
 
-- Gabriel Alexandre Signori Conci
+- Gabriel Alexandre Signori Conci  RA: 10725213812 GitHub: https://github.com/gabrielconci
   
-  RA: 10725213812
+- Guilherme Rafael de Souza  RA: 10726111483 GitHub: https://github.com/Gui53
   
-  GitHub: https://github.com/gabrielconci
+- Bruno Nedel de Souza  RA: 1072619644 GitHub: https://github.com/BrunoNedel07
   
-- Guilherme Rafael de Souza
-  
-  RA: 10726111483
-  
-  GitHub: https://github.com/Gui53
-  
-- Bruno Nedel de Souza
-  
-  RA: 1072619644
-  
-  GitHub: https://github.com/BrunoNedel07
-  
-- Enzo Lindemayer Silva
-  
-  RA: 10725214856
-  
-  Github: https://github.com/enzolsilva
+- Enzo Lindemayer Silva  RA: 10725214856 Github: https://github.com/enzolsilva
    
-- Guilherme Paulo de Souza Goes
-  
-  RA: 10726112930
-
-  GitHub: https://github.com/guilhermepsg
+- Guilherme Paulo de Souza Goes  RA: 10726112930 GitHub: https://github.com/guilhermepsg
