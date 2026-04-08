@@ -1,6 +1,6 @@
-package com.mycompany.controle_estoque_java;
+package main;
 
-public class Controle_estoque_java {
+public class Principal {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
