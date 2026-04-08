@@ -1,4 +1,4 @@
-# controle-estoque-java
+# controle_estoque_java
 # 📦 Sistema de Controle de Estoque
 
 Projeto desenvolvido para a disciplina de Programação da UNISUL, com o objetivo de implementar um sistema de controle de estoque utilizando Java.
@@ -52,8 +52,7 @@ Desenvolver uma aplicação capaz de gerenciar produtos, categorias e movimenta�
 
 1. Clone o repositório:
 
-git clone https://github.com/seu-usuario/controle-estoque-java.git
-
+git clone https://github.com/seu-usuario/controle_estoque_java.git
 
 2. Abra o projeto no NetBeans
 
@@ -71,7 +70,12 @@ O script de criação do banco será disponibilizado na pasta do projeto.
 
 ## 👥 Integrantes
 
-- Gabriel Alexandre Signori Conci
-- Guilherme Rafael de Souza  
-- Bruno Nedel de Souza 
-- Enzo Lindemayer Silva
+- Gabriel Alexandre Signori Conci  RA: 10725213812 GitHub: https://github.com/gabrielconci
+  
+- Guilherme Rafael de Souza  RA: 10726111483 GitHub: https://github.com/Gui53
+  
+- Bruno Nedel de Souza  RA: 1072619644 GitHub: https://github.com/BrunoNedel07
+  
+- Enzo Lindemayer Silva  RA: 10725214856 Github: https://github.com/enzolsilva
+   
+- Guilherme Paulo de Souza Goes  RA: 10726112930 GitHub: https://github.com/guilhermepsg
