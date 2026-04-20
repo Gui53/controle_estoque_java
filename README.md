@@ -42,8 +42,9 @@ Desenvolver uma aplicação capaz de gerenciar produtos, categorias e movimenta�
 
 ## 🛠️ Tecnologias Utilizadas
 
-- Java
-- Banco de dados
+- Java SE 25 (OpenJDK 25.0.2 LTS)
+- JDK 25 (OpenJDK 25.0.2+10-LTS)
+- Apache NetBeans IDE 29
 - GitHub
   
 ---
