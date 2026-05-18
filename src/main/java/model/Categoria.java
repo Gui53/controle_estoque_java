@@ -1,15 +1,18 @@
 package model;
 
+import enums.TipoEmbalagem;
+import enums.TipoTamanho;
+
 public class Categoria {
 
     private String nome;
-    private String tamanho;
-    private String embalagem;
+    private TipoTamanho tamanho;
+    private TipoEmbalagem embalagem;
 
     public Categoria() {
     }
 
-    public Categoria(String nome, String tamanho, String embalagem) {
+    public Categoria(String nome, TipoTamanho tamanho, TipoEmbalagem embalagem) {
         this.nome = nome;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
@@ -23,20 +26,22 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public String getTamanho() {
+    public TipoTamanho getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(String tamanho) {
+    public void setTamanho(TipoTamanho tamanho) {
         this.tamanho = tamanho;
     }
 
-    public String getEmbalagem() {
+    public TipoEmbalagem getEmbalagem() {
         return embalagem;
     }
 
-    public void setEmbalagem(String embalagem) {
+    public void setEmbalagem(TipoEmbalagem embalagem) {
         this.embalagem = embalagem;
     }
+
+    
 
 }
