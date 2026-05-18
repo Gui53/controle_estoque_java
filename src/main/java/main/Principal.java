@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import model.Movimentacao;
 import model.Produto;
-import model.TipoMovimentacao;
+import enums.TipoMovimentacao;
 
 public class Principal {
 

@@ -1,5 +1,6 @@
 package model;
 
+import enums.TipoMovimentacao;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;

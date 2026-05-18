@@ -2,7 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 import model.Movimentacao;
-import model.TipoMovimentacao;
+import enums.TipoMovimentacao;
 
 public class MovimentacaoDAO {
     
