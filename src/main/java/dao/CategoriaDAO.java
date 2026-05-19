@@ -1,5 +1,7 @@
 package dao;
 
+import enums.TipoEmbalagem;
+import enums.TipoTamanho;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,44 +14,6 @@ import model.Categoria;
 public class CategoriaDAO {
 
     private ArrayList<Categoria> lista = new ArrayList<>();
-
-    public void adicionar(Categoria categoria) {
-        lista.add(categoria);
-    }
-
-    public ArrayList<Categoria> listar() {
-        return lista;
-    }
-
-    public Categoria buscarPorNome(String nome) {
-        for (Categoria c : lista) {
-            if (c.getNome().equalsIgnoreCase(nome)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    public boolean atualizar(String nome, Categoria novaCategoria) {
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getNome().equalsIgnoreCase(nome)) {
-                lista.set(i, novaCategoria);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean remover(String nome) {
-        Categoria c = buscarPorNome(nome);
-
-        if (c != null) {
-            lista.remove(c);
-            return true;
-        }
-
-        return false;
-    }
 
     public int maiorID() {
         int maiorID = 0;
@@ -115,4 +79,81 @@ public class CategoriaDAO {
 
     }
 
+    public boolean deleteCategoriaBD(int id) {
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            stmt.executeUpdate("DELETE FROM tb_categoria WHERE id = " + id);
+            stmt.close();
+        } catch (SQLException erro) {
+            System.out.println("Erro:" + erro);
+        }
+        return true;
+    }
+
+    public boolean updateCategoriaBD(Categoria objeto) {
+
+        String sql = "UPDATE tb_categoria SET nome = ? WHERE id = ?";
+
+        try {
+
+            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+
+            stmt.setString(1, objeto.getNome());
+            stmt.setInt(2, objeto.getId());
+
+            stmt.execute();
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException erro) {
+
+            System.out.println("Erro: " + erro);
+
+            throw new RuntimeException(erro);
+        }
+    }
+
+    public ArrayList<Categoria> getLista() {
+
+        lista.clear(); // Limpa nosso ArrayList
+
+        try {
+
+            Statement stmt = this.getConexao().createStatement();
+
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_categoria");
+
+            while (res.next()) {
+
+                int id = res.getInt("id");
+                String nome = res.getString("nome");
+
+                TipoEmbalagem tipoEmbalagem
+                        = TipoEmbalagem.valueOf(res.getString("tipo_embalagem"));
+
+                TipoTamanho tipoTamanho
+                        = TipoTamanho.valueOf(res.getString("tipo_tamanho"));
+
+                Categoria objeto = new Categoria(
+                        id,
+                        nome,
+                        tipoTamanho,
+                        tipoEmbalagem
+                        
+                );
+
+                lista.add(objeto);
+            }
+
+            res.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+
+            System.out.println("Erro: " + ex);
+        }
+
+        return lista;
+    }
 }

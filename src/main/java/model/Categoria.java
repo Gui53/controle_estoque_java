@@ -15,12 +15,14 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Categoria(String nome, TipoTamanho tamanho, TipoEmbalagem embalagem) {
-
+    public Categoria(int id, String nome, TipoTamanho tamanho, TipoEmbalagem embalagem) {
+        
+        this.id = id;
         this.nome = nome;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
-
+        
+        
     }
 
     public int getId() {
@@ -30,7 +32,7 @@ public class Categoria {
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public String getNome() {
         return nome;
     }
