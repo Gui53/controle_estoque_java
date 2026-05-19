@@ -55,7 +55,7 @@ public class CategoriaDAO {
         int maiorID = 0;
         try {
             Statement stmt = this.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_alunos");
+            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_categoria");
             res.next();
             maiorID = res.getInt("id");
             stmt.close();
@@ -64,20 +64,21 @@ public class CategoriaDAO {
         }
         return maiorID;
     }
+//TESTANDO
 
-   public boolean insertCategoria(Categoria objeto) {
-        String sql = "INSERT INTO tb_alunos(id,nome,idade,curso,fase) VALUES(?,?,?,?,?)";
+    public boolean insertCategoria(Categoria objeto) {
+        String sql = "INSERT INTO tb_categoria(nome,tamanho,embalagem) VALUES(?,?,?)";
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
 
-           /* stmt.setInt(1, objeto.getId());
-            stmt.setString(2, objeto.getNome());
-            stmt.setInt(3, objeto.getEmbalagem());
-            stmt.setString(4, objeto.getTamanho());
- */
+            stmt.setString(1, objeto.getNome());
+            stmt.setString(2, objeto.getTamanho().name());
+            stmt.setString(3, objeto.getEmbalagem().name());
 
             stmt.execute();
             stmt.close();
+
+            System.out.println("CATEGORIA CADASTRADA!");
 
             return true;
         } catch (SQLException erro) {
@@ -96,7 +97,7 @@ public class CategoriaDAO {
             String url = "jdbc:mysql://" + server + ":3306/"
                     + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
-            String password = "SUA SENHA";
+            String password = "123456";
             connection = DriverManager.getConnection(url, user, password);
             if (connection != null) {
                 System.out.println("Status: Conectado!");

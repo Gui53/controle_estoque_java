@@ -1,17 +1,18 @@
 package main;
 
-import dao.MovimentacaoDAO;
-import dao.ProdutoDAO;
-import java.time.LocalDate;
-import javax.swing.JOptionPane;
-import model.Movimentacao;
-import model.Produto;
-import enums.TipoMovimentacao;
+import dao.CategoriaDAO;
+import enums.TipoTamanho;
+import enums.TipoEmbalagem;
+import model.Categoria;
 
 public class Principal {
 
     public static void main(String[] args) {
-        ProdutoDAO DAO = new ProdutoDAO();
-        DAO.getConexao();
+        CategoriaDAO dao = new CategoriaDAO();
+        
+        Categoria categoria = new Categoria("Cereais", TipoTamanho.PEQUENO, TipoEmbalagem.PLASTICO);
+        
+        dao.insertCategoria(categoria);
+        
     }
 }

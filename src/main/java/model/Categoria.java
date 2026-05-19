@@ -15,13 +15,12 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Categoria(int id, String nome, TipoTamanho tamanho, TipoEmbalagem embalagem) {
-        
-        this.id = id;
+    public Categoria(String nome, TipoTamanho tamanho, TipoEmbalagem embalagem) {
+
         this.nome = nome;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
-        
+
     }
 
     public int getId() {
@@ -31,7 +30,7 @@ public class Categoria {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -56,9 +55,9 @@ public class Categoria {
         this.embalagem = embalagem;
     }
 
-    public boolean insertCategoria(String nome, TipoTamanho tamanho, TipoEmbalagem embalagem) {
+    /*public boolean insertCategoria(String nome, TipoTamanho tamanho, TipoEmbalagem embalagem) {
         int id = this.maiorID() + 1;
-        Categoria objeto = new Categoria(id, nome, tamanho, embalagem);
+        Categoria objeto = new Categoria(nome, tamanho, embalagem);
         dao.insertCategoria(objeto);
         return true;
 
@@ -66,5 +65,5 @@ public class Categoria {
 
     public int maiorID() {
         return dao.maiorID();
-    }
+    }*/
 }
