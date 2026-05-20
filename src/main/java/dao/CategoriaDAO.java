@@ -1,5 +1,6 @@
 package dao;
 
+import connection.Conexao;
 import enums.TipoEmbalagem;
 import enums.TipoTamanho;
 import java.sql.Connection;
@@ -18,8 +19,7 @@ public class CategoriaDAO {
     public boolean insert(Categoria objeto) {
         String sql = "INSERT INTO tb_categoria(nome,tamanho,embalagem) VALUES(?,?,?)";
         try {
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
-
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
             stmt.setString(1, objeto.getNome());
             stmt.setString(2, objeto.getTamanho().name());
             stmt.setString(3, objeto.getEmbalagem().name());
@@ -38,14 +38,13 @@ public class CategoriaDAO {
 
     public ArrayList<Categoria> select() {
 
-        lista.clear(); 
+        lista.clear();
 
         try {
 
-            Statement stmt = this.getConexao().createStatement();
-
+            Statement stmt = Conexao.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_categoria");
-
+            
             while (res.next()) {
 
                 int id = res.getInt("id");
@@ -84,8 +83,7 @@ public class CategoriaDAO {
 
         try {
 
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
-
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
             stmt.setString(1, objeto.getNome());
             stmt.setString(2, objeto.getTamanho().name());
             stmt.setString(3, objeto.getEmbalagem().name());
@@ -103,22 +101,22 @@ public class CategoriaDAO {
             throw new RuntimeException(erro);
         }
     }
+//DEVE SER ARRUMADO
 
-    public boolean delete(int id) {
+    /*public boolean delete(int id) {
         try {
-            Statement stmt = this.getConexao().createStatement();
-            stmt.executeUpdate("DELETE FROM tb_categoria WHERE id = " + id);
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
             stmt.close();
         } catch (SQLException erro) {
             System.out.println("Erro:" + erro);
         }
         return true;
-    }
+    }*/
 
     public int maiorID() {
         int maiorID = 0;
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = Conexao.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_categoria");
             res.next();
             maiorID = res.getInt("id");
@@ -129,32 +127,31 @@ public class CategoriaDAO {
         return maiorID;
     }
 
-    public Connection getConexao() {
-        Connection connection = null;
-        try {
-            String driver = "com.mysql.cj.jdbc.Driver";
-            Class.forName(driver);
-            String server = "localhost";
-            String database = "db_controledeestoque";
-            String url = "jdbc:mysql://" + server + ":3306/"
-                    + database + "?useTimezone=true&serverTimezone=UTC";
-            String user = "root";
-            String password = "123456";
-            connection = DriverManager.getConnection(url, user, password);
-            if (connection != null) {
-                System.out.println("Status: Conectado!");
-            } else {
-                System.out.println("Status: NÃO CONECTADO!");
-            }
-            return connection;
-        } catch (ClassNotFoundException e) { //Driver não encontrado
-            System.out.println("O driver nao foi encontrado.");
-            return null;
-        } catch (SQLException e) {
-            System.out.println("Nao foi possivel conectar...");
-            return null;
-        }
-
-    }
-
+//    public Connection getConexao() {
+//        Connection connection = null;
+//        try {
+//            String driver = "com.mysql.cj.jdbc.Driver";
+//            Class.forName(driver);
+//            String server = "localhost";
+//            String database = "db_controledeestoque";
+//            String url = "jdbc:mysql://" + server + ":3306/"
+//                    + database + "?useTimezone=true&serverTimezone=UTC";
+//            String user = "root";
+//            String password = "123456";
+//            connection = DriverManager.getConnection(url, user, password);
+//            if (connection != null) {
+//                System.out.println("Status: Conectado!");
+//            } else {
+//                System.out.println("Status: NÃO CONECTADO!");
+//            }
+//            return connection;
+//        } catch (ClassNotFoundException e) { //Driver não encontrado
+//            System.out.println("O driver nao foi encontrado.");
+//            return null;
+//        } catch (SQLException e) {
+//            System.out.println("Nao foi possivel conectar...");
+//            return null;
+//        }
+//
+//    }
 }
