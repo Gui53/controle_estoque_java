@@ -50,11 +50,9 @@ public class CategoriaDAO {
                 int id = res.getInt("id");
                 String nome = res.getString("nome");
 
-                TipoEmbalagem tipoEmbalagem
-                        = TipoEmbalagem.valueOf(res.getString("tipo_embalagem"));
+                TipoEmbalagem tipoEmbalagem = TipoEmbalagem.valueOf(res.getString("embalagem"));
 
-                TipoTamanho tipoTamanho
-                        = TipoTamanho.valueOf(res.getString("tipo_tamanho"));
+                TipoTamanho tipoTamanho = TipoTamanho.valueOf(res.getString("tamanho"));
 
                 Categoria objeto = new Categoria(
                         id,
