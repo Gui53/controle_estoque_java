@@ -3,8 +3,6 @@ package dao;
 import connection.Conexao;
 import enums.TipoEmbalagem;
 import enums.TipoTamanho;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,8 +11,6 @@ import java.util.ArrayList;
 import model.Categoria;
 
 public class CategoriaDAO {
-
-    private ArrayList<Categoria> lista = new ArrayList<>();
 
     public boolean insert(Categoria objeto) {
         String sql = "INSERT INTO tb_categoria(nome,tamanho,embalagem) VALUES(?,?,?)";
@@ -37,6 +33,7 @@ public class CategoriaDAO {
     }
 
     public ArrayList<Categoria> select() {
+        ArrayList<Categoria> lista = new ArrayList<>();
 
         lista.clear();
 
@@ -44,7 +41,7 @@ public class CategoriaDAO {
 
             Statement stmt = Conexao.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_categoria");
-            
+
             while (res.next()) {
 
                 int id = res.getInt("id");
@@ -110,46 +107,5 @@ public class CategoriaDAO {
         }
         return true;
     }*/
-
-    public int maiorID() {
-        int maiorID = 0;
-        try {
-            Statement stmt = Conexao.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_categoria");
-            res.next();
-            maiorID = res.getInt("id");
-            stmt.close();
-        } catch (SQLException ex) {
-            System.out.println("Erro:" + ex);
-        }
-        return maiorID;
-    }
-
-//    public Connection getConexao() {
-//        Connection connection = null;
-//        try {
-//            String driver = "com.mysql.cj.jdbc.Driver";
-//            Class.forName(driver);
-//            String server = "localhost";
-//            String database = "db_controledeestoque";
-//            String url = "jdbc:mysql://" + server + ":3306/"
-//                    + database + "?useTimezone=true&serverTimezone=UTC";
-//            String user = "root";
-//            String password = "123456";
-//            connection = DriverManager.getConnection(url, user, password);
-//            if (connection != null) {
-//                System.out.println("Status: Conectado!");
-//            } else {
-//                System.out.println("Status: NÃO CONECTADO!");
-//            }
-//            return connection;
-//        } catch (ClassNotFoundException e) { //Driver não encontrado
-//            System.out.println("O driver nao foi encontrado.");
-//            return null;
-//        } catch (SQLException e) {
-//            System.out.println("Nao foi possivel conectar...");
-//            return null;
-//        }
-//
-//    }
+   
 }
