@@ -96,16 +96,24 @@ public class CategoriaDAO {
             throw new RuntimeException(erro);
         }
     }
-//DEVE SER ARRUMADO
 
-    /*public boolean delete(int id) {
+    public boolean delete(int id) {
+
+        String sql = "DELETE FROM tb_categoria WHERE id = ?";
+
         try {
+
             PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
             stmt.close();
+
         } catch (SQLException erro) {
-            System.out.println("Erro:" + erro);
+
+            System.out.println("Erro: " + erro);
+            return false;
         }
         return true;
-    }*/
-   
+    }
+
 }
