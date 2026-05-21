@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 public class Movimentacao {
+    
+    private int id;
     private Produto produto;
     private LocalDate data;
     private int quantidade;
@@ -22,6 +24,24 @@ public class Movimentacao {
         this.tipo = tipo;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+    
+    
+    
     public Produto getProduto() {
         return produto;
     }

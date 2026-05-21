@@ -2,6 +2,7 @@ package model;
 
 public class Produto {
 
+    private int id;
     private String nome;
     private double preco;
     private int quantidade;
@@ -23,6 +24,14 @@ public class Produto {
         /*this.categoria = categoria;*/
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
