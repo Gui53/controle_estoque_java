@@ -36,4 +36,25 @@ public class MovimentacaoService {
         }
     }
 
+    public void saidaProduto(Produto produto, /*deve ser mudado para double*/ int quantidade) {
+        try {
+            boolean removeu = produto.remover(quantidade);
+
+            if (!removeu) {
+                System.out.println("Estoque insuficiente!");
+                return;
+            }
+
+            //produtoDAO.update(produto);
+            Movimentacao movimentacao = new Movimentacao(produto, LocalDate.now(), quantidade, TipoMovimentacao.SAIDA);
+
+            movimentacaoDAO.insert(movimentacao);
+
+            System.out.println("Saida Realizada!");
+
+        } catch (Exception e) {
+            System.out.println("Erro: " + e);
+
+        }
+    }
 }
