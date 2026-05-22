@@ -25,7 +25,7 @@ public class MovimentacaoService {
         try {
             produto.adicionar(quantidade);
 
-            //produtoDAO.update(produto);
+            produtoDAO.updateQuantidade(produto);
             Movimentacao movimentacao = new Movimentacao(produto, LocalDate.now(), quantidade, TipoMovimentacao.ENTRADA);
 
             movimentacaoDAO.insert(movimentacao);
@@ -45,7 +45,7 @@ public class MovimentacaoService {
                 return;
             }
 
-            //produtoDAO.update(produto);
+            produtoDAO.updateQuantidade(produto);
             Movimentacao movimentacao = new Movimentacao( produto, LocalDate.now(), quantidade, TipoMovimentacao.SAIDA);
 
             movimentacaoDAO.insert(movimentacao);
