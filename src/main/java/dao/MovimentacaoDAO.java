@@ -60,6 +60,8 @@ public class MovimentacaoDAO {
                 Produto p = dao.selectById(produtoId);
 
                 Movimentacao obj = new Movimentacao(id, p, data, quantidade, tipoMovimentacao);
+                
+                lista.add(obj);
             }
 
         } catch (SQLException e) {
