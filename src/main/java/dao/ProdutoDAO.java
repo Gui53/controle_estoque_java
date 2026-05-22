@@ -23,21 +23,21 @@ public class ProdutoDAO {
 
     public Produto selectById(int id) {
         Produto produto = new Produto();
-        
+
         try {
             String sql = "SELECT * FROM tb_produto WHERE id = ?";
-            
+
             PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
-            
+
             stmt.setInt(1, id);
             ResultSet res = stmt.executeQuery();
-            
-            if(res.next()){
+
+            if (res.next()) {
                 produto.setId(res.getInt("id"));
-                
+
                 produto.setNome(res.getString("nome"));
             }
-            
+
         } catch (Exception e) {
             System.out.println("Erro: " + e);
         }
@@ -53,14 +53,49 @@ public class ProdutoDAO {
         return null;
     }
 
-    public boolean atualizar(String nome, Produto novoProduto) {
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getNome().equalsIgnoreCase(nome)) {
-                lista.set(i, novoProduto);
-                return true;
-            }
+    public boolean update(Produto produto) {
+
+        String sql = """
+        UPDATE tb_produto
+        SET nome = ?,
+            preco_unitario = ?,
+            unidade = ?,
+            quantidade_estoque = ?,
+            quantidade_minima = ?,
+            quantidade_maxima = ?,
+            tb_categoria_id = ?
+        WHERE id = ?
+    """;
+
+        try {
+
+            PreparedStatement stmt
+                    = Conexao.getConexao().prepareStatement(sql);
+
+            stmt.setString(1, produto.getNome());
+            stmt.setDouble(2, produto.getPreco());
+            stmt.setString(3, produto.getUnidade().name());
+
+            stmt.setInt(4, produto.getQuantidade());
+            stmt.setInt(5, produto.getMinimo());
+            stmt.setInt(6, produto.getMaximo());
+
+            stmt.setInt(7, produto.getCategoria().getId());
+
+            stmt.setInt(8, produto.getId());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException e) {
+
+            System.out.println("Erro: " + e);
+
+            throw new RuntimeException(e);
         }
-        return false;
     }
 
     public boolean remover(String nome) {
