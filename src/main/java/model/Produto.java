@@ -1,22 +1,26 @@
 package model;
 
+import enums.TipoUnidade;
+
 public class Produto {
 
     private int id;
     private String nome;
     private double preco;
+    private TipoUnidade unidade;
     private int quantidade;
     private int minimo;
     private int maximo;
-    private Categoria categoria;
 
+    private Categoria categoria;
     public Produto() {
-        this("", 0, 0, 0, 0, null);
+        this("",0,null,0, 0,0,null);
     }
 
-    public Produto(String nome, double preco, int quantidade, int minimo, int maximo, Categoria categoria) {
+    public Produto(String nome, double preco, TipoUnidade unidade,int quantidade, int minimo, int maximo ,Categoria categoria) {
         this.nome = nome;
         this.preco = preco;
+        this.unidade = unidade;
         this.quantidade = quantidade;
         this.minimo = minimo;
         this.maximo = maximo;
@@ -29,6 +33,14 @@ public class Produto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public TipoUnidade getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(TipoUnidade unidade) {
+        this.unidade = unidade;
     }
 
     public String getNome() {
@@ -77,10 +89,9 @@ public class Produto {
         }
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Categoria getCategoria(){
+    return categoria;
     }
-
     public void adicionar(int qtd) {
         if (qtd >= 0) {
             this.quantidade += qtd;
