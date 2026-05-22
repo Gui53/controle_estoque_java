@@ -65,12 +65,11 @@ public class ProdutoDAO {
             quantidade_maxima = ?,
             tb_categoria_id = ?
         WHERE id = ?
-    """;
+        """;
 
         try {
 
-            PreparedStatement stmt
-                    = Conexao.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
 
             stmt.setString(1, produto.getNome());
             stmt.setDouble(2, produto.getPreco());
@@ -83,6 +82,35 @@ public class ProdutoDAO {
             stmt.setInt(7, produto.getCategoria().getId());
 
             stmt.setInt(8, produto.getId());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException e) {
+
+            System.out.println("Erro: " + e);
+
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean updateQuantidade(Produto produto) {
+
+        String sql = """
+        UPDATE tb_produto
+        SET quantidade_estoque = ?
+        WHERE id = ?
+        """;
+
+        try {
+
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, produto.getQuantidade());
+            stmt.setInt(2, produto.getId());
 
             stmt.executeUpdate();
 
