@@ -1,25 +1,17 @@
 package dao;
 
 import connection.Conexao;
+import enums.TipoUnidade;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Categoria;
 import model.Produto;
 
 public class ProdutoDAO {
-
-    private ArrayList<Produto> lista = new ArrayList<>();
-
-    public void adicionar(Produto produto) {
-        lista.add(produto);
-    }
-
-    public ArrayList<Produto> listar() {
-        return lista;
-    }
 
     public Produto selectById(int id) {
         Produto produto = new Produto();
@@ -36,21 +28,28 @@ public class ProdutoDAO {
                 produto.setId(res.getInt("id"));
 
                 produto.setNome(res.getString("nome"));
+                produto.setUnidade(TipoUnidade.valueOf(res.getString("unidade")));
+                produto.setQuantidade(res.getDouble("quantidade_estoque"));
+                produto.setMinimo(res.getDouble("quantidade_minima"));
+                produto.setMaximo(res.getDouble("quantidade_maxima"));
+                int categoriaId
+                        = res.getInt("tb_categoria_id");
+
+                CategoriaDAO categoriaDAO
+                        = new CategoriaDAO();
+
+                /*Categoria categoria
+                        = categoriaDAO.selectById(categoriaId);
+
+                produto.setCategoria(categoria);*/
             }
+            res.close();
+            stmt.close();
 
         } catch (Exception e) {
             System.out.println("Erro: " + e);
         }
         return produto;
-    }
-
-    public Produto buscarPorNome(String nome) {
-        for (Produto p : lista) {
-            if (p.getNome().equalsIgnoreCase(nome)) {
-                return p;
-            }
-        }
-        return null;
     }
 
     public boolean update(Produto produto) {
@@ -76,8 +75,8 @@ public class ProdutoDAO {
             stmt.setString(3, produto.getUnidade().name());
 
             stmt.setDouble(4, produto.getQuantidade());
-            stmt.setInt(5, produto.getMinimo());
-            stmt.setInt(6, produto.getMaximo());
+            stmt.setDouble(5, produto.getMinimo());
+            stmt.setDouble(6, produto.getMaximo());
 
             stmt.setInt(7, produto.getCategoria().getId());
 
@@ -124,14 +123,5 @@ public class ProdutoDAO {
 
             throw new RuntimeException(e);
         }
-    }
-
-    public boolean remover(String nome) {
-        Produto p = buscarPorNome(nome);
-        if (p != null) {
-            lista.remove(p);
-            return true;
-        }
-        return false;
     }
 }
