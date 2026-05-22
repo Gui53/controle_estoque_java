@@ -13,8 +13,6 @@ import model.Produto;
 
 public class MovimentacaoDAO {
 
-    private ArrayList<Movimentacao> lista = new ArrayList<>();
-
     public boolean insert(Movimentacao m) {
         String sql = "INSERT INTO tb_movimentacao(data_movimentacao, quantidade_movimentada, tipo_movimentacao, tb_produto_id) VALUES(?,?,?,?) ";
 
@@ -60,7 +58,7 @@ public class MovimentacaoDAO {
                 Produto p = dao.selectById(produtoId);
 
                 Movimentacao obj = new Movimentacao(id, p, data, quantidade, tipoMovimentacao);
-                
+
                 lista.add(obj);
             }
 
@@ -70,28 +68,62 @@ public class MovimentacaoDAO {
         return lista;
     }
 
-    public double totalEntradas() {
+    public double totalEntradas(int produtoId) {
         double total = 0;
 
-        for (int i = 0; i < lista.size(); i++) {
-            Movimentacao m = lista.get(i);
+        String sql = """
+                     SELECT SUM(quantidade_movimentada) AS total
+                     FROM tb_movimentacao 
+                     WHERE tipo_movimentacao = 'ENTRADA'
+                     AND tb_produto_id = ?
+                     """;
 
-            if (m.getTipo() == TipoMovimentacao.ENTRADA) {
-                total += m.getQuantidade();
+        try {
+            PreparedStatement stmt
+                    = Conexao.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, produtoId);
+
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+                total = res.getDouble("total");
             }
+
+            res.close();
+            stmt.close();
+        } catch (Exception e) {
+            System.out.println("Erro: " + e);
         }
         return total;
     }
 
-    public double totalSaidas() {
+    public double totalSaidas(int produtoId) {
         double total = 0;
 
-        for (int i = 0; i < lista.size(); i++) {
-            Movimentacao m = lista.get(i);
+        String sql = """
+                     SELECT SUM(quantidade_movimentada) AS total
+                     FROM tb_movimentacao 
+                     WHERE tipo_movimentacao = 'SAIDA'
+                     AND tb_produto_id = ?
+                     """;
 
-            if (m.getTipo() == TipoMovimentacao.SAIDA) {
-                total += m.getQuantidade();
+        try {
+            PreparedStatement stmt
+                    = Conexao.getConexao().prepareStatement(sql);
+
+            stmt.setInt(1, produtoId);
+
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+                total = res.getDouble("total");
             }
+
+            res.close();
+            stmt.close();
+        } catch (Exception e) {
+            System.out.println("Erro: " + e);
         }
         return total;
     }
