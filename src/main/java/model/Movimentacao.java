@@ -14,10 +14,11 @@ public class Movimentacao {
     private TipoMovimentacao tipo;
 
     public Movimentacao() {
-        this(null, LocalDate.now(), 0, TipoMovimentacao.ENTRADA);
+        this(0, null, LocalDate.now(), 0, TipoMovimentacao.ENTRADA);
     }
     
-    public Movimentacao(Produto produto, LocalDate data, int quantidade, TipoMovimentacao tipo) {
+    public Movimentacao(int id, Produto produto, LocalDate data, int quantidade, TipoMovimentacao tipo) {
+        this.id = id;
         this.produto = produto;
         this.data = data;
         this.quantidade = quantidade;
