@@ -28,6 +28,7 @@ public class ProdutoDAO {
                 produto.setId(res.getInt("id"));
 
                 produto.setNome(res.getString("nome"));
+                produto.setPreco(res.getDouble("preco_unitario"));
                 produto.setUnidade(TipoUnidade.valueOf(res.getString("unidade")));
                 produto.setQuantidade(res.getDouble("quantidade_estoque"));
                 produto.setMinimo(res.getDouble("quantidade_minima"));
