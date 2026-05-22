@@ -1,7 +1,10 @@
 package dao;
 
+import connection.Conexao;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Produto;
@@ -16,6 +19,29 @@ public class ProdutoDAO {
 
     public ArrayList<Produto> listar() {
         return lista;
+    }
+
+    public Produto selectById(int id) {
+        Produto produto = new Produto();
+        
+        try {
+            String sql = "SELECT * FROM tb_produto WHERE id = ?";
+            
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+            
+            stmt.setInt(1, id);
+            ResultSet res = stmt.executeQuery();
+            
+            if(res.next()){
+                produto.setId(res.getInt("id"));
+                
+                produto.setNome(res.getString("nome"));
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Erro: " + e);
+        }
+        return produto;
     }
 
     public Produto buscarPorNome(String nome) {
@@ -47,7 +73,7 @@ public class ProdutoDAO {
     }
 
     public Connection getConexao() {
-        Connection connection = null; 
+        Connection connection = null;
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
