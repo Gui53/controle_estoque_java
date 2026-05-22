@@ -20,23 +20,23 @@ public class MovimentacaoService {
     private ProdutoDAO produtoDAO = new ProdutoDAO();
     private MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
 
-    public void entradaProduto(int id, Produto produto, /*deve ser mudado para double*/ int quantidade) {
+    public void entradaProduto(Produto produto, /*deve ser mudado para double*/ int quantidade) {
 
         try {
             produto.adicionar(quantidade);
 
             //produtoDAO.update(produto);
-            Movimentacao movimentacao = new Movimentacao(id, produto, LocalDate.now(), quantidade, TipoMovimentacao.ENTRADA);
+            Movimentacao movimentacao = new Movimentacao(produto, LocalDate.now(), quantidade, TipoMovimentacao.ENTRADA);
 
             movimentacaoDAO.insert(movimentacao);
 
             System.out.println("Entrada concluída!");
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             System.out.println("Erro: " + e);
         }
     }
 
-    public void saidaProduto(int id, Produto produto, /*deve ser mudado para double*/ int quantidade) {
+    public void saidaProduto(Produto produto, /*deve ser mudado para double*/ int quantidade) {
         try {
             boolean removeu = produto.remover(quantidade);
 
@@ -46,13 +46,13 @@ public class MovimentacaoService {
             }
 
             //produtoDAO.update(produto);
-            Movimentacao movimentacao = new Movimentacao(id, produto, LocalDate.now(), quantidade, TipoMovimentacao.SAIDA);
+            Movimentacao movimentacao = new Movimentacao( produto, LocalDate.now(), quantidade, TipoMovimentacao.SAIDA);
 
             movimentacaoDAO.insert(movimentacao);
 
             System.out.println("Saida Realizada!");
 
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             System.out.println("Erro: " + e);
 
         }

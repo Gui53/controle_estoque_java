@@ -24,6 +24,13 @@ public class Movimentacao {
         this.quantidade = quantidade;
         this.tipo = tipo;
     }
+    
+    public Movimentacao(Produto produto, LocalDate data, int quantidade, TipoMovimentacao tipo) {
+        this.produto = produto;
+        this.data = data;
+        this.quantidade = quantidade;
+        this.tipo = tipo;
+    }
 
     public int getId() {
         return id;
@@ -40,9 +47,7 @@ public class Movimentacao {
     public void setData(LocalDate data) {
         this.data = data;
     }
-    
-    
-    
+     
     public Produto getProduto() {
         return produto;
     }
@@ -72,35 +77,4 @@ public class Movimentacao {
         this.tipo = tipo;
     }
     
-    public void executar(){
-        if(produto == null){
-            JOptionPane.showMessageDialog(null, "Produto inválido");
-            return;
-        }
-        
-        if(quantidade <= 0){
-            JOptionPane.showMessageDialog(null, "Quantidade inválida!");
-            return;                
-        }
-        
-        if(tipo == TipoMovimentacao.ENTRADA){
-            produto.adicionar(quantidade);
-        }else{
-            if(produto.getQuantidade() < quantidade){
-                JOptionPane.showMessageDialog(null, "Estoque insuficiente!");
-                return;
-            }
-            produto.remover(quantidade);
-        }
-        JOptionPane.showMessageDialog(null, "Movimentação realizada com sucesso!");
-        
-        if(produto.getQuantidade() < produto.getMinimo()){
-            JOptionPane.showMessageDialog(null, "ESTOQUE ABAIXO DO MÍNIMO!");
-        }
-        
-        if(produto.getQuantidade() > produto.getMaximo()){
-            JOptionPane.showMessageDialog(null, "ESTOQUE ACIMA DO MÁXIMO!");
-        }
-        
-    }
 }
