@@ -8,20 +8,19 @@ public class Produto {
     private int quantidade;
     private int minimo;
     private int maximo;
+    private Categoria categoria;
 
-    //Aguardando classe Categoria ficar pronta
-    /*private Categoria categoria;*/
     public Produto() {
-        this("", 0, 0, 0, 0);
+        this("", 0, 0, 0, 0, null);
     }
 
-    public Produto(String nome, double preco, int quantidade, int minimo, int maximo /* ,Categoria categoria*/) {
+    public Produto(String nome, double preco, int quantidade, int minimo, int maximo, Categoria categoria) {
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
         this.minimo = minimo;
         this.maximo = maximo;
-        /*this.categoria = categoria;*/
+        this.categoria = categoria;
     }
 
     public int getId() {
@@ -31,7 +30,7 @@ public class Produto {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -78,9 +77,10 @@ public class Produto {
         }
     }
 
-    /*public Categoria getCategoria(){
-    return categoria;
-    }*/
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
     public void adicionar(int qtd) {
         if (qtd >= 0) {
             this.quantidade += qtd;
