@@ -8,7 +8,7 @@ public class Produto {
     private String nome;
     private double preco;
     private TipoUnidade unidade;
-    private int quantidade;
+    private double quantidade;
     private int minimo;
     private int maximo;
 
@@ -17,7 +17,7 @@ public class Produto {
         this("",0,null,0, 0,0,null);
     }
 
-    public Produto(String nome, double preco, TipoUnidade unidade,int quantidade, int minimo, int maximo ,Categoria categoria) {
+    public Produto(String nome, double preco, TipoUnidade unidade,double quantidade, int minimo, int maximo ,Categoria categoria) {
         this.nome = nome;
         this.preco = preco;
         this.unidade = unidade;
@@ -59,11 +59,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(double quantidade) {
         if (quantidade > 0) {
             this.quantidade = quantidade;
         }
@@ -92,13 +92,13 @@ public class Produto {
     public Categoria getCategoria(){
     return categoria;
     }
-    public void adicionar(int qtd) {
+    public void adicionar(double qtd) {
         if (qtd >= 0) {
             this.quantidade += qtd;
         }
     }
 
-    public boolean remover(int qtd) {
+    public boolean remover(double qtd) {
         if (qtd > 0 && this.quantidade >= qtd) {
             this.quantidade -= qtd;
             return true;

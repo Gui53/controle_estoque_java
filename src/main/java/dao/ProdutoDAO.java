@@ -75,7 +75,7 @@ public class ProdutoDAO {
             stmt.setDouble(2, produto.getPreco());
             stmt.setString(3, produto.getUnidade().name());
 
-            stmt.setInt(4, produto.getQuantidade());
+            stmt.setDouble(4, produto.getQuantidade());
             stmt.setInt(5, produto.getMinimo());
             stmt.setInt(6, produto.getMaximo());
 
@@ -109,7 +109,7 @@ public class ProdutoDAO {
 
             PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
 
-            stmt.setInt(1, produto.getQuantidade());
+            stmt.setDouble(1, produto.getQuantidade());
             stmt.setInt(2, produto.getId());
 
             stmt.executeUpdate();
@@ -133,32 +133,5 @@ public class ProdutoDAO {
             return true;
         }
         return false;
-    }
-
-    public Connection getConexao() {
-        Connection connection = null;
-        try {
-            String driver = "com.mysql.cj.jdbc.Driver";
-            Class.forName(driver);
-            String server = "localhost";
-            String database = "db_controledeestoque";
-            String url = "jdbc:mysql://" + server + ":3306/"
-                    + database + "?useTimezone=true&serverTimezone=UTC";
-            String user = "root";
-            String password = "SUA SENHA";
-            connection = DriverManager.getConnection(url, user, password);
-            if (connection != null) {
-                System.out.println("Status: Conectado!");
-            } else {
-                System.out.println("Status: NÃO CONECTADO!");
-            }
-            return connection;
-        } catch (ClassNotFoundException e) { //Driver não encontrado
-            System.out.println("O driver nao foi encontrado.");
-            return null;
-        } catch (SQLException e) {
-            System.out.println("Nao foi possivel conectar...");
-            return null;
-        }
     }
 }

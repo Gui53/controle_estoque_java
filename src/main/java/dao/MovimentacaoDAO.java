@@ -21,7 +21,7 @@ public class MovimentacaoDAO {
         try {
             PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
             stmt.setDate(1, java.sql.Date.valueOf(m.getData()));
-            stmt.setInt(2, m.getQuantidade());
+            stmt.setDouble(2, m.getQuantidade());
             stmt.setString(3, m.getTipo().name());
             stmt.setInt(4, m.getProduto().getId());
 
@@ -51,7 +51,7 @@ public class MovimentacaoDAO {
             while (res.next()) {
                 int id = res.getInt("id");
                 LocalDate data = res.getDate("data_movimentacao").toLocalDate();
-                int quantidade = res.getInt("quantidade_movimentada");
+                double quantidade = res.getDouble("quantidade_movimentada");
                 TipoMovimentacao tipoMovimentacao = TipoMovimentacao.valueOf(res.getString("tipo_movimentacao"));
                 int produtoId = res.getInt("tb_produto_id");
 
@@ -70,8 +70,8 @@ public class MovimentacaoDAO {
         return lista;
     }
 
-    public int totalEntradas() {
-        int total = 0;
+    public double totalEntradas() {
+        double total = 0;
 
         for (int i = 0; i < lista.size(); i++) {
             Movimentacao m = lista.get(i);
@@ -83,8 +83,8 @@ public class MovimentacaoDAO {
         return total;
     }
 
-    public int totalSaidas() {
-        int total = 0;
+    public double totalSaidas() {
+        double total = 0;
 
         for (int i = 0; i < lista.size(); i++) {
             Movimentacao m = lista.get(i);

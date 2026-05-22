@@ -10,14 +10,14 @@ public class Movimentacao {
     private int id;
     private Produto produto;
     private LocalDate data;
-    private int quantidade;
+    private double quantidade;
     private TipoMovimentacao tipo;
 
     public Movimentacao() {
         this(0, null, LocalDate.now(), 0, TipoMovimentacao.ENTRADA);
     }
     
-    public Movimentacao(int id, Produto produto, LocalDate data, int quantidade, TipoMovimentacao tipo) {
+    public Movimentacao(int id, Produto produto, LocalDate data, double quantidade, TipoMovimentacao tipo) {
         this.id = id;
         this.produto = produto;
         this.data = data;
@@ -25,7 +25,7 @@ public class Movimentacao {
         this.tipo = tipo;
     }
     
-    public Movimentacao(Produto produto, LocalDate data, int quantidade, TipoMovimentacao tipo) {
+    public Movimentacao(Produto produto, LocalDate data, double quantidade, TipoMovimentacao tipo) {
         this.produto = produto;
         this.data = data;
         this.quantidade = quantidade;
@@ -61,11 +61,11 @@ public class Movimentacao {
         return data.format(formatter);
     }
 
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
 

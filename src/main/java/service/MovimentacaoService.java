@@ -20,7 +20,7 @@ public class MovimentacaoService {
     private ProdutoDAO produtoDAO = new ProdutoDAO();
     private MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
 
-    public void entradaProduto(Produto produto, /*deve ser mudado para double*/ int quantidade) {
+    public void entradaProduto(Produto produto, double quantidade) {
 
         try {
             produto.adicionar(quantidade);
@@ -36,7 +36,7 @@ public class MovimentacaoService {
         }
     }
 
-    public void saidaProduto(Produto produto, /*deve ser mudado para double*/ int quantidade) {
+    public void saidaProduto(Produto produto, double quantidade) {
         try {
             boolean removeu = produto.remover(quantidade);
 
