@@ -35,6 +35,22 @@ public class PrincipalView extends javax.swing.JFrame {
         // Eventos dos botões
         btnCategorias.addActionListener(e -> new CategoriaView().setVisible(true));
         btnSair.addActionListener(e -> System.exit(0));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                        null,
+                        "Deseja realmente sair do sistema?",
+                        "Confirmar saída",
+                        javax.swing.JOptionPane.YES_NO_OPTION
+                );
+                if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
