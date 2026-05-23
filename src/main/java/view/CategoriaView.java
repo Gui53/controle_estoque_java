@@ -48,6 +48,7 @@ public class CategoriaView extends javax.swing.JFrame {
      */
     public CategoriaView() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.BorderLayout());
         txtId.setEditable(false);
         carregarTabela();
