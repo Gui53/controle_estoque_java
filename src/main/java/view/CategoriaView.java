@@ -5,6 +5,9 @@
 package view;
 
 import dao.CategoriaDAO;
+import enums.TipoEmbalagem;
+import enums.TipoTamanho;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Categoria;
 
@@ -120,12 +123,22 @@ public class CategoriaView extends javax.swing.JFrame {
         cbEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LATA", "VIDRO", "PLASTICO" }));
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(this::btnSalvarActionPerformed);
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(this::btnAtualizarActionPerformed);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(this::btnLimparActionPerformed);
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
 
         tblCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -210,6 +223,68 @@ public class CategoriaView extends javax.swing.JFrame {
     private void cbTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTamanhoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTamanhoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        String nome = txtNome.getText().trim();
+        if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o nome da categoria.");
+            return;
+        }
+        TipoTamanho tamanho = TipoTamanho.valueOf(cbTamanho.getSelectedItem().toString());
+        TipoEmbalagem embalagem = TipoEmbalagem.valueOf(cbEmbalagem.getSelectedItem().toString());
+
+        Categoria c = new Categoria(0, nome, tamanho, embalagem);
+        dao.insert(c);
+        JOptionPane.showMessageDialog(this, "Categoria salva com sucesso!");
+        limparCampos();
+        carregarTabela();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        if (txtId.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione uma categoria na tabela.");
+            return;
+        }
+        int id = Integer.parseInt(txtId.getText());
+        String nome = txtNome.getText().trim();
+        TipoTamanho tamanho = TipoTamanho.valueOf(cbTamanho.getSelectedItem().toString());
+        TipoEmbalagem embalagem = TipoEmbalagem.valueOf(cbEmbalagem.getSelectedItem().toString());
+
+        Categoria c = new Categoria(id, nome, tamanho, embalagem);
+        dao.update(c);
+        JOptionPane.showMessageDialog(this, "Categoria atualizada!");
+        limparCampos();
+        carregarTabela();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (txtId.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione uma categoria na tabela.");
+            return;
+        }
+        int id = Integer.parseInt(txtId.getText());
+        int confirm = JOptionPane.showConfirmDialog(this, "Deseja excluir esta categoria?");
+        if (confirm == JOptionPane.YES_OPTION) {
+            dao.delete(id);
+            JOptionPane.showMessageDialog(this, "Categoria excluída!");
+            limparCampos();
+            carregarTabela();
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        int linha = tblCategorias.getSelectedRow();
+        if (linha >= 0) {
+            txtId.setText(tblCategorias.getValueAt(linha, 0).toString());
+            txtNome.setText(tblCategorias.getValueAt(linha, 1).toString());
+            cbTamanho.setSelectedItem(tblCategorias.getValueAt(linha, 2).toString());
+            cbEmbalagem.setSelectedItem(tblCategorias.getValueAt(linha, 3).toString());
+        }
+    }//GEN-LAST:event_jScrollPane1MouseClicked
 
     /**
      * @param args the command line arguments
