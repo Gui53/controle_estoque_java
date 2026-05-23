@@ -39,8 +39,8 @@ public class CategoriaView extends javax.swing.JFrame {
     private void limparCampos() {
         txtId.setText("");
         txtNome.setText("");
-        cbTamanho.setSelectedIndex(0);
-        cbEmbalagem.setSelectedIndex(0);
+        cbTamanho.setSelectedIndex(-1);
+        cbEmbalagem.setSelectedIndex(-1);
     }
 
     /**
@@ -52,8 +52,23 @@ public class CategoriaView extends javax.swing.JFrame {
         txtId.setEditable(false);
         carregarTabela();
         estilizarTela();
-        setSize(600, 500);
+        setSize(700, 500);
         setLocationRelativeTo(null);
+        cbTamanho.setSelectedIndex(-1);
+        cbEmbalagem.setSelectedIndex(-1);
+
+        tblCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int linha = tblCategorias.getSelectedRow();
+                if (linha >= 0) {
+                    txtId.setText(tblCategorias.getValueAt(linha, 0).toString());
+                    txtNome.setText(tblCategorias.getValueAt(linha, 1).toString());
+                    cbTamanho.setSelectedItem(tblCategorias.getValueAt(linha, 2).toString());
+                    cbEmbalagem.setSelectedItem(tblCategorias.getValueAt(linha, 3).toString());
+                }
+            }
+        });
     }
 
     /**
@@ -115,6 +130,8 @@ public class CategoriaView extends javax.swing.JFrame {
         label1.setName(""); // NOI18N
         label1.setText("ID:");
 
+        txtId.setPreferredSize(new java.awt.Dimension(80, 20));
+
         label2.setText("Nome:");
 
         label3.setText("Tamanho:");
@@ -127,15 +144,19 @@ public class CategoriaView extends javax.swing.JFrame {
         cbEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LATA", "VIDRO", "PLASTICO" }));
 
         btnSalvar.setText("Salvar");
+        btnSalvar.setPreferredSize(new java.awt.Dimension(100, 30));
         btnSalvar.addActionListener(this::btnSalvarActionPerformed);
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.setPreferredSize(new java.awt.Dimension(100, 30));
         btnAtualizar.addActionListener(this::btnAtualizarActionPerformed);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.setPreferredSize(new java.awt.Dimension(100, 30));
         btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
         btnLimpar.setText("Limpar");
+        btnLimpar.setPreferredSize(new java.awt.Dimension(100, 30));
         btnLimpar.addActionListener(this::btnLimparActionPerformed);
 
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,20 +205,20 @@ public class CategoriaView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSalvar)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnAtualizar)
+                                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnExcluir)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnLimpar))
+                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -215,10 +236,10 @@ public class CategoriaView extends javax.swing.JFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnAtualizar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnLimpar))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
