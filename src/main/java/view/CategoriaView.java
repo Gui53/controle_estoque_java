@@ -48,8 +48,12 @@ public class CategoriaView extends javax.swing.JFrame {
      */
     public CategoriaView() {
         initComponents();
+        getContentPane().setLayout(new java.awt.BorderLayout());
         txtId.setEditable(false);
         carregarTabela();
+        estilizarTela();
+        setSize(600, 500);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -158,16 +162,8 @@ public class CategoriaView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSalvar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAtualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLimpar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,16 +177,27 @@ public class CategoriaView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSalvar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAtualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnExcluir)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpar))
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -206,15 +213,15 @@ public class CategoriaView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnAtualizar)
                     .addComponent(btnExcluir)
                     .addComponent(btnLimpar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -309,6 +316,71 @@ public class CategoriaView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new CategoriaView().setVisible(true));
+    }
+
+    private void estilizarTela() {
+        // Fundo da janela
+        getContentPane().setBackground(new java.awt.Color(240, 236, 228));
+
+        // Botão Salvar — verde
+        btnSalvar.setBackground(new java.awt.Color(45, 158, 95));
+        btnSalvar.setForeground(java.awt.Color.WHITE);
+        btnSalvar.setFocusPainted(false);
+        btnSalvar.setBorderPainted(false);
+        btnSalvar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        // Botão Atualizar — azul
+        btnAtualizar.setBackground(new java.awt.Color(45, 107, 191));
+        btnAtualizar.setForeground(java.awt.Color.WHITE);
+        btnAtualizar.setFocusPainted(false);
+        btnAtualizar.setBorderPainted(false);
+        btnAtualizar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
+        btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        // Botão Excluir — vermelho
+        btnExcluir.setBackground(new java.awt.Color(192, 57, 43));
+        btnExcluir.setForeground(java.awt.Color.WHITE);
+        btnExcluir.setFocusPainted(false);
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        // Botão Limpar — cinza
+        btnLimpar.setBackground(new java.awt.Color(130, 130, 130));
+        btnLimpar.setForeground(java.awt.Color.WHITE);
+        btnLimpar.setFocusPainted(false);
+        btnLimpar.setBorderPainted(false);
+        btnLimpar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
+        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        // Cabeçalho da tabela — azul escuro
+        tblCategorias.getTableHeader().setBackground(new java.awt.Color(45, 53, 97));
+        tblCategorias.getTableHeader().setForeground(java.awt.Color.WHITE);
+        tblCategorias.getTableHeader().setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
+
+        // Linhas da tabela
+        tblCategorias.setRowHeight(28);
+        tblCategorias.setFont(new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 13));
+        tblCategorias.setGridColor(new java.awt.Color(220, 215, 205));
+        tblCategorias.setSelectionBackground(new java.awt.Color(208, 232, 255));
+        tblCategorias.setSelectionForeground(new java.awt.Color(30, 30, 30));
+
+        // Título da janela
+        setTitle("Gerenciar Categorias");
+
+        // Cabeçalho
+        javax.swing.JPanel pnlHeader = new javax.swing.JPanel();
+        pnlHeader.setBackground(new java.awt.Color(45, 53, 97));
+        pnlHeader.setPreferredSize(new java.awt.Dimension(getWidth(), 50));
+        pnlHeader.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 12));
+
+        javax.swing.JLabel lblTitulo = new javax.swing.JLabel("📦 Sistema de Controle de Estoque — Categorias");
+        lblTitulo.setForeground(java.awt.Color.WHITE);
+        lblTitulo.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 16));
+
+        pnlHeader.add(lblTitulo);
+        getContentPane().add(pnlHeader, java.awt.BorderLayout.NORTH);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,7 +13,8 @@ public class PrincipalView extends javax.swing.JFrame {
 
     public PrincipalView() {
         initComponents();
-
+        setSize(800, 550);
+        setLocationRelativeTo(null);
         pnlMenu.setLayout(new java.awt.GridLayout(5, 1));
 
         btnCategorias = new javax.swing.JButton("🏷️ Categorias");
@@ -46,12 +47,12 @@ public class PrincipalView extends javax.swing.JFrame {
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
-            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
+                pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 160, Short.MAX_VALUE)
         );
         pnlMenuLayout.setVerticalGroup(
-            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+                pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 470, Short.MAX_VALUE)
         );
 
         getContentPane().add(pnlMenu, java.awt.BorderLayout.LINE_START);
