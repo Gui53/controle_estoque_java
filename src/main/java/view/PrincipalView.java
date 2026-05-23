@@ -30,6 +30,7 @@ public class PrincipalView extends javax.swing.JFrame {
         pnlMenu.add(btnSair);
 
         estilizarMenu();
+        montarConteudo();
 
         // Eventos dos botões
         btnCategorias.addActionListener(e -> new CategoriaView().setVisible(true));
@@ -59,6 +60,56 @@ public class PrincipalView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>
+
+    private void montarConteudo() {
+        // Cabeçalho azul
+        javax.swing.JPanel pnlHeader = new javax.swing.JPanel();
+        pnlHeader.setBackground(new java.awt.Color(45, 53, 97));
+        pnlHeader.setPreferredSize(new java.awt.Dimension(getWidth(), 50));
+        pnlHeader.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 12));
+
+        javax.swing.JLabel lblTitulo = new javax.swing.JLabel("📦 Sistema de Controle de Estoque");
+        lblTitulo.setForeground(java.awt.Color.WHITE);
+        lblTitulo.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 16));
+        pnlHeader.add(lblTitulo);
+
+        // Área central
+        javax.swing.JPanel pnlCentro = new javax.swing.JPanel();
+        pnlCentro.setBackground(new java.awt.Color(240, 236, 228));
+        pnlCentro.setLayout(new java.awt.GridBagLayout());
+
+        javax.swing.JPanel pnlCard = new javax.swing.JPanel();
+        pnlCard.setBackground(java.awt.Color.WHITE);
+        pnlCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(220, 215, 205)));
+        pnlCard.setLayout(new java.awt.GridLayout(3, 1, 0, 10));
+        pnlCard.setPreferredSize(new java.awt.Dimension(380, 140));
+
+        javax.swing.JLabel lblBemVindo = new javax.swing.JLabel("👋 Bem-vindo ao Sistema", javax.swing.SwingConstants.CENTER);
+        lblBemVindo.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 18));
+        lblBemVindo.setForeground(new java.awt.Color(45, 53, 97));
+
+        javax.swing.JLabel lblSub = new javax.swing.JLabel("Selecione uma opção no menu lateral", javax.swing.SwingConstants.CENTER);
+        lblSub.setFont(new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 13));
+        lblSub.setForeground(new java.awt.Color(120, 120, 120));
+
+        // Badge de conexão
+        boolean conectado = connection.Conexao.getConexao() != null;
+        javax.swing.JLabel lblConexao = new javax.swing.JLabel(
+                conectado ? "✅ Conectado ao banco de dados" : "❌ Sem conexão com o banco",
+                javax.swing.SwingConstants.CENTER
+        );
+        lblConexao.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
+        lblConexao.setForeground(conectado ? new java.awt.Color(45, 122, 45) : new java.awt.Color(192, 57, 43));
+
+        pnlCard.add(lblBemVindo);
+        pnlCard.add(lblSub);
+        pnlCard.add(lblConexao);
+
+        pnlCentro.add(pnlCard);
+
+        getContentPane().add(pnlHeader, java.awt.BorderLayout.NORTH);
+        getContentPane().add(pnlCentro, java.awt.BorderLayout.CENTER);
+    }
 
     private void estilizarMenu() {
         pnlMenu.setBackground(new java.awt.Color(45, 53, 97));
