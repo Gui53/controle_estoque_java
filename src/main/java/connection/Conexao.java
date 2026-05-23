@@ -20,7 +20,7 @@ public class Conexao {
                     + database + "?useTimezone=true&serverTimezone=UTC";
 
             String user = "root";
-            String password = "123456";
+            String password = "SUA SENHA";
 
             connection = DriverManager.getConnection(url, user, password);
 
