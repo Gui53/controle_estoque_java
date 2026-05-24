@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import model.Categoria;
 import model.Produto;
@@ -41,6 +42,27 @@ public class ProdutoDAO {
             System.out.println("Erro: " + erro);
             throw new RuntimeException(erro);
         }
+    }
+
+    public ArrayList<Produto> select() {
+        ArrayList<Produto> lista = new ArrayList<>();
+
+        try {
+            Statement stmt = Conexao.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_produto");
+
+            while (res.next()) {
+                lista.add(montarProduto(res));
+            }
+
+            res.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Erro: " + ex);
+        }
+
+        return lista;
     }
 
     private Produto montarProduto(ResultSet res) throws SQLException {
