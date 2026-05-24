@@ -38,6 +38,20 @@ public class ProdutoView extends javax.swing.JFrame {
             cbCategoria.addItem(c.getNome() + "|" + c.getId());
         }
         cbCategoria.setSelectedIndex(-1);
+
+        // Renderizador para esconder o ID
+        cbCategoria.setRenderer(new javax.swing.DefaultListCellRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list,
+                    Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value != null) {
+                    String[] partes = value.toString().split("\\|");
+                    setText(partes[0]);
+                }
+                return this;
+            }
+        });
     }
 
     private void limparCampos() {
