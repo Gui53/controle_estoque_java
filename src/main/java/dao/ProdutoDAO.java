@@ -13,6 +13,25 @@ import model.Produto;
 
 public class ProdutoDAO {
 
+    private Produto montarProduto(ResultSet res) throws SQLException {
+        Produto produto = new Produto();
+
+        produto.setId(res.getInt("id"));
+        produto.setNome(res.getString("nome"));
+        produto.setPreco(res.getDouble("preco_unitario"));
+        produto.setUnidade(TipoUnidade.valueOf(res.getString("unidade")));
+        produto.setQuantidade(res.getDouble("quantidade_estoque"));
+        produto.setMinimo(res.getDouble("quantidade_minima"));
+        produto.setMaximo(res.getDouble("quantidade_maxima"));
+
+        int categoriaId = res.getInt("tb_categoria_id");
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        Categoria categoria = categoriaDAO.selectById(categoriaId);
+        produto.setCategoria(categoria);
+
+        return produto;
+    }
+
     public Produto selectById(int id) {
         Produto produto = new Produto();
 
