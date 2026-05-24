@@ -9,7 +9,57 @@ package view;
  * @author Gabriel Conci
  */
 public class ProdutoView extends javax.swing.JFrame {
-    
+
+    private dao.ProdutoDAO dao = new dao.ProdutoDAO();
+    private dao.CategoriaDAO categoriaDAO = new dao.CategoriaDAO();
+
+    private void carregarTabela() {
+        String[] colunas = {"ID", "Nome", "Preço", "Unidade", "Estoque", "Mínimo", "Máximo", "Categoria"};
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(colunas, 0);
+
+        for (model.Produto p : dao.select()) {
+            model.addRow(new Object[]{
+                p.getId(),
+                p.getNome(),
+                p.getPreco(),
+                p.getUnidade(),
+                p.getQuantidade(),
+                p.getMinimo(),
+                p.getMaximo(),
+                p.getCategoria().getNome()
+            });
+        }
+        tblProdutos.setModel(model);
+    }
+
+    private void carregarCategorias() {
+        cbCategoria.removeAllItems();
+        for (model.Categoria c : categoriaDAO.select()) {
+            cbCategoria.addItem(c.getNome() + "|" + c.getId());
+        }
+        cbCategoria.setSelectedIndex(-1);
+    }
+
+    private void limparCampos() {
+        txtId.setText("");
+        txtNome.setText("");
+        txtPreco.setText("");
+        txtQuantidade.setText("");
+        txtMinimo.setText("");
+        txtMaximo.setText("");
+        cbUnidade.setSelectedIndex(-1);
+        cbCategoria.setSelectedIndex(-1);
+    }
+
+    private model.Categoria getCategoriaSelected() {
+        if (cbCategoria.getSelectedItem() == null) {
+            return null;
+        }
+        String[] partes = cbCategoria.getSelectedItem().toString().split("\\|");
+        int id = Integer.parseInt(partes[1]);
+        return categoriaDAO.selectById(id);
+    }
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProdutoView.class.getName());
 
     /**
