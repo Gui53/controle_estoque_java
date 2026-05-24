@@ -67,6 +67,38 @@ public class ProdutoView extends javax.swing.JFrame {
      */
     public ProdutoView() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.BorderLayout());
+        txtId.setEditable(false);
+        carregarCategorias();
+        carregarTabela();
+        estilizarTela();
+        setSize(750, 600);
+        setLocationRelativeTo(null);
+        cbUnidade.setSelectedIndex(-1);
+
+        tblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int linha = tblProdutos.getSelectedRow();
+                if (linha >= 0) {
+                    txtId.setText(tblProdutos.getValueAt(linha, 0).toString());
+                    txtNome.setText(tblProdutos.getValueAt(linha, 1).toString());
+                    txtPreco.setText(tblProdutos.getValueAt(linha, 2).toString());
+                    cbUnidade.setSelectedItem(tblProdutos.getValueAt(linha, 3).toString());
+                    txtQuantidade.setText(tblProdutos.getValueAt(linha, 4).toString());
+                    txtMinimo.setText(tblProdutos.getValueAt(linha, 5).toString());
+                    txtMaximo.setText(tblProdutos.getValueAt(linha, 6).toString());
+                    String nomeCategoria = tblProdutos.getValueAt(linha, 7).toString();
+                    for (int i = 0; i < cbCategoria.getItemCount(); i++) {
+                        if (cbCategoria.getItemAt(i).toString().startsWith(nomeCategoria + "|")) {
+                            cbCategoria.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
     }
 
     /**
