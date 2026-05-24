@@ -169,30 +169,23 @@ public class ProdutoDAO {
     }
 
     public boolean updateQuantidade(Produto produto) {
-
         String sql = """
-        UPDATE tb_produto
-        SET quantidade_estoque = ?
-        WHERE id = ?
-        """;
+                UPDATE tb_produto
+                SET quantidade_estoque = ?
+                WHERE id = ?
+                """;
 
         try {
-
             PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
-
             stmt.setDouble(1, produto.getQuantidade());
             stmt.setInt(2, produto.getId());
-
             stmt.executeUpdate();
-
             stmt.close();
 
             return true;
 
         } catch (SQLException e) {
-
             System.out.println("Erro: " + e);
-
             throw new RuntimeException(e);
         }
     }
