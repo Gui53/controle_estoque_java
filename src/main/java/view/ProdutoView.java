@@ -51,6 +51,60 @@ public class ProdutoView extends javax.swing.JFrame {
         cbCategoria.setSelectedIndex(-1);
     }
 
+    private void estilizarTela() {
+        getContentPane().setBackground(new java.awt.Color(240, 236, 228));
+
+        btnSalvar.setBackground(new java.awt.Color(45, 158, 95));
+        btnSalvar.setForeground(java.awt.Color.WHITE);
+        btnSalvar.setFocusPainted(false);
+        btnSalvar.setBorderPainted(false);
+        btnSalvar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnAtualizar.setBackground(new java.awt.Color(45, 107, 191));
+        btnAtualizar.setForeground(java.awt.Color.WHITE);
+        btnAtualizar.setFocusPainted(false);
+        btnAtualizar.setBorderPainted(false);
+        btnAtualizar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
+        btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnExcluir.setBackground(new java.awt.Color(192, 57, 43));
+        btnExcluir.setForeground(java.awt.Color.WHITE);
+        btnExcluir.setFocusPainted(false);
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnLimpar.setBackground(new java.awt.Color(130, 130, 130));
+        btnLimpar.setForeground(java.awt.Color.WHITE);
+        btnLimpar.setFocusPainted(false);
+        btnLimpar.setBorderPainted(false);
+        btnLimpar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
+        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        tblProdutos.getTableHeader().setBackground(new java.awt.Color(45, 53, 97));
+        tblProdutos.getTableHeader().setForeground(java.awt.Color.WHITE);
+        tblProdutos.getTableHeader().setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
+        tblProdutos.setRowHeight(28);
+        tblProdutos.setFont(new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 13));
+        tblProdutos.setGridColor(new java.awt.Color(220, 215, 205));
+        tblProdutos.setSelectionBackground(new java.awt.Color(208, 232, 255));
+        tblProdutos.setSelectionForeground(new java.awt.Color(30, 30, 30));
+
+        setTitle("Gerenciar Produtos");
+
+        javax.swing.JPanel pnlHeader = new javax.swing.JPanel();
+        pnlHeader.setBackground(new java.awt.Color(45, 53, 97));
+        pnlHeader.setPreferredSize(new java.awt.Dimension(getWidth(), 50));
+        pnlHeader.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 12));
+
+        javax.swing.JLabel lblTitulo = new javax.swing.JLabel("📦 Sistema de Controle de Estoque — Produtos");
+        lblTitulo.setForeground(java.awt.Color.WHITE);
+        lblTitulo.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 16));
+        pnlHeader.add(lblTitulo);
+        getContentPane().add(pnlHeader, java.awt.BorderLayout.NORTH);
+    }
+
     private model.Categoria getCategoriaSelected() {
         if (cbCategoria.getSelectedItem() == null) {
             return null;
