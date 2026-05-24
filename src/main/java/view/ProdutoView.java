@@ -168,12 +168,16 @@ public class ProdutoView extends javax.swing.JFrame {
         cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(this::btnSalvarActionPerformed);
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(this::btnAtualizarActionPerformed);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(this::btnLimparActionPerformed);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -283,6 +287,69 @@ public class ProdutoView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        String nome = txtNome.getText().trim();
+        if (nome.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Informe o nome do produto.");
+            return;
+        }
+        if (cbUnidade.getSelectedItem() == null || cbCategoria.getSelectedItem() == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione a unidade e a categoria.");
+            return;
+        }
+        model.Produto p = new model.Produto();
+        p.setNome(nome);
+        p.setPreco(Double.parseDouble(txtPreco.getText()));
+        p.setUnidade(enums.TipoUnidade.valueOf(cbUnidade.getSelectedItem().toString()));
+        p.setQuantidade(Double.parseDouble(txtQuantidade.getText()));
+        p.setMinimo(Double.parseDouble(txtMinimo.getText()));
+        p.setMaximo(Double.parseDouble(txtMaximo.getText()));
+        p.setCategoria(getCategoriaSelected());
+        dao.insert(p);
+        javax.swing.JOptionPane.showMessageDialog(this, "Produto salvo com sucesso!");
+        limparCampos();
+        carregarTabela();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        if (txtId.getText().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela.");
+            return;
+        }
+        model.Produto p = new model.Produto();
+        p.setId(Integer.parseInt(txtId.getText()));
+        p.setNome(txtNome.getText().trim());
+        p.setPreco(Double.parseDouble(txtPreco.getText()));
+        p.setUnidade(enums.TipoUnidade.valueOf(cbUnidade.getSelectedItem().toString()));
+        p.setQuantidade(Double.parseDouble(txtQuantidade.getText()));
+        p.setMinimo(Double.parseDouble(txtMinimo.getText()));
+        p.setMaximo(Double.parseDouble(txtMaximo.getText()));
+        p.setCategoria(getCategoriaSelected());
+        dao.update(p);
+        javax.swing.JOptionPane.showMessageDialog(this, "Produto atualizado!");
+        limparCampos();
+        carregarTabela();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (txtId.getText().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela.");
+            return;
+        }
+        int id = Integer.parseInt(txtId.getText());
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja excluir este produto?");
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            dao.delete(id);
+            javax.swing.JOptionPane.showMessageDialog(this, "Produto excluído!");
+            limparCampos();
+            carregarTabela();
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
      * @param args the command line arguments
