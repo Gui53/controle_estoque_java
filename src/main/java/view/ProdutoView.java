@@ -369,11 +369,11 @@ public class ProdutoView extends javax.swing.JFrame {
         }
         model.Produto p = new model.Produto();
         p.setNome(nome);
-        p.setPreco(Double.parseDouble(txtPreco.getText()));
+        p.setPreco(Double.parseDouble(txtPreco.getText().replace(",", ".")));
         p.setUnidade(enums.TipoUnidade.valueOf(cbUnidade.getSelectedItem().toString()));
-        p.setQuantidade(Double.parseDouble(txtQuantidade.getText()));
-        p.setMinimo(Double.parseDouble(txtMinimo.getText()));
-        p.setMaximo(Double.parseDouble(txtMaximo.getText()));
+        p.setQuantidade(Double.parseDouble(txtQuantidade.getText().replace(",", ".")));
+        p.setMinimo(Double.parseDouble(txtMinimo.getText().replace(",", ".")));
+        p.setMaximo(Double.parseDouble(txtMaximo.getText().replace(",", ".")));
         p.setCategoria(getCategoriaSelected());
         dao.insert(p);
         javax.swing.JOptionPane.showMessageDialog(this, "Produto salvo com sucesso!");
