@@ -39,6 +39,32 @@ public class RelatorioDAO {
     
     public void produtosAcimaMaximo(){
         
+        String sql = """
+            SELECT nome, quantidade, maximo
+            FROM produto
+            WHERE quantidade > maximo
+        """;
+        
+        try (
+                Connection conn = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()
+        ) {
+            
+            System.out.println("\n=== PRODUTO ACIMA DO MÁXIMO ===");
+            
+            while(rs.next()) {
+                System.out.println(
+                    rs.getString("nome")
+                    + " | Quantidade: "
+                    + rs.getInt("quantidade")
+                    + " | Máximo: "
+                    + rs.getInt("maximo")
+                );
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public void valorTotalEstoque() {
