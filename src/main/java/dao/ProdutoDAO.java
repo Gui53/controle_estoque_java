@@ -13,6 +13,36 @@ import model.Produto;
 
 public class ProdutoDAO {
 
+    public boolean insert(Produto produto) {
+        String sql = """
+                INSERT INTO tb_produto(nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, tb_categoria_id)
+                VALUES(?, ?, ?, ?, ?, ?, ?)
+                """;
+
+        try {
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+
+            stmt.setString(1, produto.getNome());
+            stmt.setDouble(2, produto.getPreco());
+            stmt.setString(3, produto.getUnidade().name());
+            stmt.setDouble(4, produto.getQuantidade());
+            stmt.setDouble(5, produto.getMinimo());
+            stmt.setDouble(6, produto.getMaximo());
+            stmt.setInt(7, produto.getCategoria().getId());
+
+            stmt.execute();
+            stmt.close();
+
+            System.out.println("PRODUTO CADASTRADO!");
+
+            return true;
+
+        } catch (SQLException erro) {
+            System.out.println("Erro: " + erro);
+            throw new RuntimeException(erro);
+        }
+    }
+
     private Produto montarProduto(ResultSet res) throws SQLException {
         Produto produto = new Produto();
 
