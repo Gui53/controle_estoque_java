@@ -65,6 +65,23 @@ public class ProdutoDAO {
         return lista;
     }
 
+    public boolean delete(int id) {
+        String sql = "DELETE FROM tb_produto WHERE id = ?";
+
+        try {
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            stmt.close();
+
+            return true;
+
+        } catch (SQLException erro) {
+            System.out.println("Erro: " + erro);
+            return false;
+        }
+    }
+
     private Produto montarProduto(ResultSet res) throws SQLException {
         Produto produto = new Produto();
 
