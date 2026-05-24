@@ -69,6 +69,26 @@ public class RelatorioDAO {
     
     public void valorTotalEstoque() {
         
+        String sql = """
+            SELECT SUM(preco * quantidade) AS total
+            FROM produto
+        """;
+        
+        try (
+                Connection conn = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()
+        ) {
+            
+            if(rs.next()) {
+                System.out.println(
+                        "\nValor total do estoque: R$ "
+                        + rs.getDouble("total")
+                );                                             
+            }
+        } catch(Exception e) {
+            e.printStackTrace();                                                                                                
+        }
     } 
     
     
