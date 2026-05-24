@@ -37,38 +37,21 @@ public class ProdutoDAO {
 
         try {
             String sql = "SELECT * FROM tb_produto WHERE id = ?";
-
             PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
-
             stmt.setInt(1, id);
             ResultSet res = stmt.executeQuery();
 
             if (res.next()) {
-                produto.setId(res.getInt("id"));
-
-                produto.setNome(res.getString("nome"));
-                produto.setPreco(res.getDouble("preco_unitario"));
-                produto.setUnidade(TipoUnidade.valueOf(res.getString("unidade")));
-                produto.setQuantidade(res.getDouble("quantidade_estoque"));
-                produto.setMinimo(res.getDouble("quantidade_minima"));
-                produto.setMaximo(res.getDouble("quantidade_maxima"));
-                int categoriaId
-                        = res.getInt("tb_categoria_id");
-
-                CategoriaDAO categoriaDAO
-                        = new CategoriaDAO();
-
-                /*Categoria categoria
-                        = categoriaDAO.selectById(categoriaId);
-
-                produto.setCategoria(categoria);*/
+                produto = montarProduto(res);
             }
+
             res.close();
             stmt.close();
 
         } catch (Exception e) {
             System.out.println("Erro: " + e);
         }
+
         return produto;
     }
 
