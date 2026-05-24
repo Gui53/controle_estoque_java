@@ -9,6 +9,32 @@ public class RelatorioDAO {
     
     public void produtosAbaixoMinimo(){
     
+        String sql = """
+                SELECT nome, quantidade, minimo
+                FROM produto
+                WHERE quantidade < minimo
+            """;
+        
+        try (
+                Connection conn = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conn.prepapeStatement(sql);
+                ResultSet rs = stmt.executeQuery()
+                ){
+            System.out.println("\n=== PRODUTOS ABAIXO DO MÍNIMO ===");
+            
+            while(rs.next()) {
+                System.out.println(
+                    rs.getString("nome")
+                    + " | Quantidade: "
+                    + rs.getInt("quantidade")
+                    + " | Mínimo: "
+                    + rs.getInt("minimo")
+                );                                   
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+            
     }
     
     public void produtosAcimaMaximo(){
