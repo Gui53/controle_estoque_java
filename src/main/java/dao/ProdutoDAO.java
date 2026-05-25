@@ -187,4 +187,22 @@ public class ProdutoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean reajustarPrecos(double percentual) {
+        String sql = "UPDATE tb_produto SET preco_unitario = preco_unitario * (1 + ? / 100)";
+
+        try {
+            PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+            stmt.setDouble(1, percentual);
+            stmt.executeUpdate();
+            stmt.close();
+
+            System.out.println("Preços reajustados em " + percentual + "%");
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e);
+            throw new RuntimeException(e);
+        }
+    }
 }
