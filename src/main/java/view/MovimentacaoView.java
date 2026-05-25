@@ -54,6 +54,7 @@ public class MovimentacaoView extends JFrame {
         add(criarPainelTabela(), BorderLayout.SOUTH);
 
         carregarProdutos();
+        carregarTabela();
     }
 
     // ── cabeçalho ───────────────────────────────────────────────
@@ -172,6 +173,24 @@ public class MovimentacaoView extends JFrame {
         cbProduto.setSelectedIndex(-1);
     }
     
+    private void carregarTabela() {
+        String[] colunas = {"ID", "Data", "Produto", "Quantidade", "Tipo"};
+        DefaultTableModel model = new DefaultTableModel(colunas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) { return false; }
+        };
+        for (Movimentacao m : movimentacaoDAO.select()) {
+            model.addRow(new Object[]{
+                m.getId(),
+                m.getDataFormatada(),
+                m.getProduto().getNome(),
+                m.getQuantidade(),
+                m.getTipo()
+            });
+        }
+        tblMovimentacoes.setModel(model);
+    }
+    
     private void realizarMovimentacao() {
         if (cbProduto.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(this, "Selecione um produto.",
@@ -220,6 +239,7 @@ public class MovimentacaoView extends JFrame {
         }
 
         carregarProdutos();
+        carregarTabela();
         txtQuantidade.setText("");
         cbProduto.setSelectedIndex(-1);
         cbTipo.setSelectedIndex(-1);
