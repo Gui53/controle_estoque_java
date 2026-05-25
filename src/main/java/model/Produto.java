@@ -65,7 +65,7 @@ public class Produto {
     }
 
     public void setQuantidade(double quantidade) {
-        if (quantidade > 0) {
+        if (quantidade >= 0) {
             this.quantidade = quantidade;
         }
     }
