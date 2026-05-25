@@ -1,11 +1,11 @@
 package view;
 
 import connection.Conexao;
+import connection.DatabaseSetup;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -145,12 +145,14 @@ public class LoginView extends JFrame {
         lblStatus.setForeground(new Color(45, 107, 191));
         lblStatus.setText("Conectando...");
 
+        // Cria o banco e tabelas se não existirem
+        DatabaseSetup.inicializar(usuario, senha);
+
         boolean conectado = Conexao.inicializar(usuario, senha);
 
         if (conectado) {
             lblStatus.setForeground(new Color(45, 158, 95));
             lblStatus.setText("✅ Conectado com sucesso!");
-            // Abre o sistema e fecha o login
             new PrincipalView().setVisible(true);
             dispose();
         } else {
