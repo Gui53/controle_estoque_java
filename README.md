@@ -45,6 +45,8 @@ Desenvolver uma aplicação capaz de gerenciar produtos, categorias e movimenta�
 - Java SE 25 (OpenJDK 25.0.2 LTS)
 - JDK 25 (OpenJDK 25.0.2+10-LTS)
 - Apache NetBeans IDE 29
+- MySQL Workbench 8.0
+- MySQL 9.7.0
 - GitHub
   
 ---
@@ -57,15 +59,15 @@ git clone https://github.com/seu-usuario/controle_estoque_java.git
 
 2. Abra o projeto no NetBeans
 
-3. Execute a classe `Main.java`
+3. Execute a classe `Principal.java`
 
 ---
 
 ## 🗄️ Banco de Dados
 
-O sistema utilizará MySQL para persistência de dados.
+O sistema utiliza MySQL para persistência de dados.
 
-O script de criação do banco será disponibilizado na pasta do projeto.
+O script de criação do banco está disponível na pasta do projeto.
 
 ---
 
@@ -75,7 +77,7 @@ O script de criação do banco será disponibilizado na pasta do projeto.
   
 - Guilherme Rafael de Souza  RA: 10726111483 GitHub: https://github.com/Gui53
   
-- Bruno Nedel de Souza  RA: 1072619644 GitHub: https://github.com/BrunoNedel07
+- Bruno Nedel de Souza  RA: 1072619644 GitHub: https://github.com/BrunoNedel007
   
 - Enzo Lindemayer Silva  RA: 10725214856 Github: https://github.com/enzolsilva
    
