@@ -51,7 +51,8 @@ public class MovimentacaoView extends JFrame {
 
         add(criarHeader(), BorderLayout.NORTH);
         add(criarFormulario(), BorderLayout.CENTER);
-        
+        add(criarPainelTabela(), BorderLayout.SOUTH);
+
     }
 
     // ── cabeçalho ───────────────────────────────────────────────
@@ -141,6 +142,26 @@ public class MovimentacaoView extends JFrame {
         return pnl;
     }
 
+    private JPanel criarPainelTabela() {
+        JPanel pnlTabela = new JPanel(new BorderLayout());
+        pnlTabela.setBackground(new Color(240, 236, 228));
+        pnlTabela.setBorder(BorderFactory.createEmptyBorder(0, 15, 15, 15));
+
+        JLabel lblHistorico = new JLabel("📋 Histórico de Movimentações");
+        lblHistorico.setFont(new Font("SansSerif", Font.BOLD, 13));
+        lblHistorico.setBorder(BorderFactory.createEmptyBorder(10, 0, 6, 0));
+        pnlTabela.add(lblHistorico, BorderLayout.NORTH);
+
+        tblMovimentacoes = new JTable();
+        estilizarTabela(tblMovimentacoes);
+
+        JScrollPane scroll = new JScrollPane(tblMovimentacoes);
+        scroll.setPreferredSize(new Dimension(700, 220));
+        pnlTabela.add(scroll, BorderLayout.CENTER);
+
+        return pnlTabela;
+    }
+
     private void realizarMovimentacao() {
         if (cbProduto.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(this, "Selecione um produto.",
@@ -188,12 +209,12 @@ public class MovimentacaoView extends JFrame {
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         }
 
+
         txtQuantidade.setText("");
         cbProduto.setSelectedIndex(-1);
         cbTipo.setSelectedIndex(-1);
     }
 
-    // ── estilos ──────────────────────────────────────────────────
     private void estilizarBotao(JButton btn, Color cor) {
         btn.setBackground(cor);
         btn.setForeground(Color.WHITE);
@@ -203,4 +224,14 @@ public class MovimentacaoView extends JFrame {
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
+    private void estilizarTabela(JTable tabela) {
+        tabela.getTableHeader().setBackground(new Color(45, 53, 97));
+        tabela.getTableHeader().setForeground(Color.WHITE);
+        tabela.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 12));
+        tabela.setRowHeight(28);
+        tabela.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        tabela.setGridColor(new Color(220, 215, 205));
+        tabela.setSelectionBackground(new Color(208, 232, 255));
+        tabela.setSelectionForeground(new Color(30, 30, 30));
+    }
 }
