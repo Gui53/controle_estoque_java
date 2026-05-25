@@ -237,6 +237,15 @@ public class MovimentacaoView extends JFrame {
                     "Saída de " + quantidade + " unidade(s) registrada!",
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        if(produto.getQuantidade() <= produto.getMinimo()){
+            JOptionPane.showMessageDialog(this, "Quantidade abaixo do mínimo. \n"
+                    + "MÍNIMO: " + produto.getMinimo());
+        }
+        if(produto.getQuantidade() > produto.getMaximo()){
+            JOptionPane.showMessageDialog(this, "Quantidade acima do máximo! \n"
+                    + "MÁXIMO: " + produto.getMaximo());
+        }
 
         carregarProdutos();
         carregarTabela();
