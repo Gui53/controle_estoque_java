@@ -53,6 +53,7 @@ public class MovimentacaoView extends JFrame {
         add(criarFormulario(), BorderLayout.CENTER);
         add(criarPainelTabela(), BorderLayout.SOUTH);
 
+        carregarProdutos();
     }
 
     // ── cabeçalho ───────────────────────────────────────────────
@@ -162,6 +163,15 @@ public class MovimentacaoView extends JFrame {
         return pnlTabela;
     }
 
+    private void carregarProdutos() {
+        listaProdutos = produtoDAO.select();
+        cbProduto.removeAllItems();
+        for (Produto p : listaProdutos) {
+            cbProduto.addItem(p.getNome() + "  [estoque: " + p.getQuantidade() + "]");
+        }
+        cbProduto.setSelectedIndex(-1);
+    }
+    
     private void realizarMovimentacao() {
         if (cbProduto.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(this, "Selecione um produto.",
@@ -209,7 +219,7 @@ public class MovimentacaoView extends JFrame {
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         }
 
-
+        carregarProdutos();
         txtQuantidade.setText("");
         cbProduto.setSelectedIndex(-1);
         cbTipo.setSelectedIndex(-1);
