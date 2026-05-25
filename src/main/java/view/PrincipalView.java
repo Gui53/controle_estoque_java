@@ -35,6 +35,7 @@ public class PrincipalView extends javax.swing.JFrame {
         // Eventos dos botões
         btnCategorias.addActionListener(e -> new CategoriaView().setVisible(true));
         btnProdutos.addActionListener(e -> new ProdutoView().setVisible(true));
+        btnMovimentacoes.addActionListener(e -> new MovimentacaoView().setVisible(true));
         btnSair.addActionListener(e -> System.exit(0));
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
