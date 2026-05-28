@@ -3,7 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import util.ConnectionFactory;
+import connection.Conexao;
 
 public class RelatorioDAO {
     
@@ -16,8 +16,8 @@ public class RelatorioDAO {
             """;
         
         try (
-                Connection conn = ConnectionFactory.getConnection();
-                PreparedStatement stmt = conn.prepapeStatement(sql);
+                Connection conn = Conexao.getConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()
                 ){
             System.out.println("\n=== PRODUTOS ABAIXO DO MÍNIMO ===");
@@ -32,7 +32,7 @@ public class RelatorioDAO {
                 );                                   
             }
         } catch(Exception e) {
-            e.printStackTrace();
+;            e.printStackTrace();
         }
  
     }
@@ -46,7 +46,7 @@ public class RelatorioDAO {
         """;
         
         try (
-                Connection conn = ConnectionFactory.getConnection();
+                Connection conn = Conexao.getConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()
         ) {
@@ -76,7 +76,7 @@ public class RelatorioDAO {
         """;
         
         try (
-                Connection conn = ConnectionFactory.getConnection();
+                Connection conn = Conexao.getConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()
         ) {
