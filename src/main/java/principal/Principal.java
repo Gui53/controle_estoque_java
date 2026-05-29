@@ -1,6 +1,6 @@
 package principal;
 
-import view.LoginView;
+import visao.LoginView;
 
 /**
  * Classe principal do sistema.

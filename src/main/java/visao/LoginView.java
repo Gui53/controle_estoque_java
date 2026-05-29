@@ -1,4 +1,4 @@
-package view;
+package visao;
 
 import conexao.Conexao;
 import conexao.DatabaseSetup;

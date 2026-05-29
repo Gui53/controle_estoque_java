@@ -1,4 +1,4 @@
-package view;
+package visao;
 
 import dao.MovimentacaoDAO;
 import dao.ProdutoDAO;

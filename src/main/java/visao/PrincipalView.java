@@ -1,4 +1,4 @@
-package view;
+package visao;
 
 public class PrincipalView extends javax.swing.JFrame {
 

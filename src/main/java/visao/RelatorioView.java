@@ -1,4 +1,4 @@
-package view;
+package visao;
 
 import dao.RelatorioDAO;
 import java.util.Scanner;
