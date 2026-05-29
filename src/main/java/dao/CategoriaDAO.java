@@ -12,7 +12,7 @@ import modelo.Categoria;
 
 public class CategoriaDAO {
 
-    public boolean insert(Categoria objeto) {
+    public boolean inserir(Categoria objeto) {
 
         String sql = "INSERT INTO tb_categoria(nome,tamanho,embalagem) VALUES(?,?,?)";
 
@@ -39,7 +39,7 @@ public class CategoriaDAO {
         }
     }
 
-    public ArrayList<Categoria> select() {
+    public ArrayList<Categoria> visualizar() {
 
         ArrayList<Categoria> lista = new ArrayList<>();
 
@@ -69,7 +69,7 @@ public class CategoriaDAO {
         return lista;
     }
 
-    public Categoria selectById(int id) {
+    public Categoria selecionarPorId(int id) {
 
         String sql = "SELECT * FROM tb_categoria WHERE id = ?";
 
@@ -104,7 +104,7 @@ public class CategoriaDAO {
         return null;
     }
 
-    public boolean update(Categoria objeto) {
+    public boolean atualizar(Categoria objeto) {
 
         String sql = "UPDATE tb_categoria SET nome = ?, tamanho = ?, embalagem = ? WHERE id = ?";
 
@@ -130,7 +130,7 @@ public class CategoriaDAO {
         }
     }
 
-    public boolean delete(int id) {
+    public boolean apagar(int id) {
 
         String sql = "DELETE FROM tb_categoria WHERE id = ?";
 

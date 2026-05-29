@@ -34,7 +34,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void carregarCategorias() {
         cbCategoria.removeAllItems();
-        for (modelo.Categoria c : categoriaDAO.select()) {
+        for (modelo.Categoria c : categoriaDAO.visualizar()) {
             cbCategoria.addItem(c.getNome() + "|" + c.getId());
         }
         cbCategoria.setSelectedIndex(-1);
@@ -125,7 +125,7 @@ public class ProdutoView extends javax.swing.JFrame {
         }
         String[] partes = cbCategoria.getSelectedItem().toString().split("\\|");
         int id = Integer.parseInt(partes[1]);
-        return categoriaDAO.selectById(id);
+        return categoriaDAO.selecionarPorId(id);
     }
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProdutoView.class.getName());

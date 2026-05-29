@@ -25,7 +25,7 @@ public class CategoriaView extends javax.swing.JFrame {
         String[] colunas = {"ID", "Nome", "Tamanho", "Embalagem"};
         DefaultTableModel model = new DefaultTableModel(colunas, 0);
 
-        for (Categoria c : dao.select()) {
+        for (Categoria c : dao.visualizar()) {
             model.addRow(new Object[]{
                 c.getId(),
                 c.getNome(),
@@ -263,7 +263,7 @@ public class CategoriaView extends javax.swing.JFrame {
         TipoEmbalagem embalagem = TipoEmbalagem.valueOf(cbEmbalagem.getSelectedItem().toString());
 
         Categoria c = new Categoria(0, nome, tamanho, embalagem);
-        dao.insert(c);
+        dao.inserir(c);
         JOptionPane.showMessageDialog(this, "Categoria salva com sucesso!");
         limparCampos();
         carregarTabela();
@@ -280,7 +280,7 @@ public class CategoriaView extends javax.swing.JFrame {
         TipoEmbalagem embalagem = TipoEmbalagem.valueOf(cbEmbalagem.getSelectedItem().toString());
 
         Categoria c = new Categoria(id, nome, tamanho, embalagem);
-        dao.update(c);
+        dao.atualizar(c);
         JOptionPane.showMessageDialog(this, "Categoria atualizada!");
         limparCampos();
         carregarTabela();
@@ -294,7 +294,7 @@ public class CategoriaView extends javax.swing.JFrame {
         int id = Integer.parseInt(txtId.getText());
         int confirm = JOptionPane.showConfirmDialog(this, "Deseja excluir esta categoria?");
         if (confirm == JOptionPane.YES_OPTION) {
-            dao.delete(id);
+            dao.apagar(id);
             JOptionPane.showMessageDialog(this, "Categoria excluída!");
             limparCampos();
             carregarTabela();

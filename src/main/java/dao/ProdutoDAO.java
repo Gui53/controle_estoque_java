@@ -93,7 +93,7 @@ public class ProdutoDAO {
 
         int categoriaId = res.getInt("tb_categoria_id");
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        Categoria categoria = categoriaDAO.selectById(categoriaId);
+        Categoria categoria = categoriaDAO.selecionarPorId(categoriaId);
         produto.setCategoria(categoria);
 
         return produto;
