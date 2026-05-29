@@ -1,4 +1,4 @@
-package service;
+package servico;
 
 import dao.MovimentacaoDAO;
 import dao.ProdutoDAO;

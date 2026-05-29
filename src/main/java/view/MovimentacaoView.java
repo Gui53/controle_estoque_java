@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.Movimentacao;
 import modelo.Produto;
-import service.MovimentacaoService;
+import servico.MovimentacaoService;
 
 /**
  * Tela responsável pelo gerenciamento das movimentações
