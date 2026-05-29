@@ -1,6 +1,6 @@
 package dao;
 
-import connection.Conexao;
+import conexao.Conexao;
 import java.util.ArrayList;
 import model.Movimentacao;
 import enums.TipoMovimentacao;

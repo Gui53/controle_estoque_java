@@ -1,7 +1,7 @@
 package view;
 
-import connection.Conexao;
-import connection.DatabaseSetup;
+import conexao.Conexao;
+import conexao.DatabaseSetup;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;

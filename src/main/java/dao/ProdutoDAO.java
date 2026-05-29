@@ -1,6 +1,6 @@
 package dao;
 
-import connection.Conexao;
+import conexao.Conexao;
 import enums.TipoUnidade;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

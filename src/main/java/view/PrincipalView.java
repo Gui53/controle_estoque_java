@@ -111,7 +111,7 @@ public class PrincipalView extends javax.swing.JFrame {
         lblSub.setForeground(new java.awt.Color(120, 120, 120));
 
         // Badge de conexão
-        boolean conectado = connection.Conexao.getConexao() != null;
+        boolean conectado = conexao.Conexao.getConexao() != null;
         javax.swing.JLabel lblConexao = new javax.swing.JLabel(
                 conectado ? "✅ Conectado ao banco de dados" : "❌ Sem conexão com o banco",
                 javax.swing.SwingConstants.CENTER
