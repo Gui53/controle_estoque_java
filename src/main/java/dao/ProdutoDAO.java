@@ -12,7 +12,7 @@ import modelo.Produto;
 
 public class ProdutoDAO {
 
-    public boolean insert(Produto produto) {
+    public boolean inserir(Produto produto) {
         String sql = """
                 INSERT INTO tb_produto(nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, tb_categoria_id)
                 VALUES(?, ?, ?, ?, ?, ?, ?)
@@ -42,7 +42,7 @@ public class ProdutoDAO {
         }
     }
 
-    public ArrayList<Produto> select() {
+    public ArrayList<Produto> visualizar() {
         ArrayList<Produto> lista = new ArrayList<>();
 
         try {
@@ -63,7 +63,7 @@ public class ProdutoDAO {
         return lista;
     }
 
-    public boolean delete(int id) {
+    public boolean apagar(int id) {
         String sql = "DELETE FROM tb_produto WHERE id = ?";
 
         try {
@@ -99,7 +99,7 @@ public class ProdutoDAO {
         return produto;
     }
 
-    public Produto selectById(int id) {
+    public Produto selecionarPorId(int id) {
         Produto produto = new Produto();
 
         try {
@@ -122,7 +122,7 @@ public class ProdutoDAO {
         return produto;
     }
 
-    public boolean update(Produto produto) {
+    public boolean atualizar(Produto produto) {
 
         String sql = """
         UPDATE tb_produto
@@ -166,7 +166,7 @@ public class ProdutoDAO {
         }
     }
 
-    public boolean updateQuantidade(Produto produto) {
+    public boolean atualizarQuantidade(Produto produto) {
         String sql = """
                 UPDATE tb_produto
                 SET quantidade_estoque = ?

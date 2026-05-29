@@ -81,7 +81,7 @@ public class MovimentacaoDAO {
 
                 ProdutoDAO dao = new ProdutoDAO();
 
-                Produto p = dao.selectById(produtoId);
+                Produto p = dao.selecionarPorId(produtoId);
 
                 Movimentacao obj =
                         new Movimentacao(id, p, data, quantidade, tipoMovimentacao);

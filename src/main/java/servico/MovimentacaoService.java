@@ -30,7 +30,7 @@ public class MovimentacaoService {
 
             produto.adicionar(quantidade);
 
-            produtoDAO.updateQuantidade(produto);
+            produtoDAO.atualizarQuantidade(produto);
 
             Movimentacao movimentacao =
                     new Movimentacao(
@@ -67,7 +67,7 @@ public class MovimentacaoService {
                 return;
             }
 
-            produtoDAO.updateQuantidade(produto);
+            produtoDAO.atualizarQuantidade(produto);
 
             Movimentacao movimentacao =
                     new Movimentacao(

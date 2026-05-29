@@ -262,7 +262,7 @@ public class MovimentacaoView extends JFrame {
      */
     private void carregarProdutos() {
 
-        listaProdutos = produtoDAO.select();
+        listaProdutos = produtoDAO.visualizar();
 
         cbProduto.removeAllItems();
 

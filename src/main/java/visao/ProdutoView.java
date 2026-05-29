@@ -17,7 +17,7 @@ public class ProdutoView extends javax.swing.JFrame {
         String[] colunas = {"ID", "Nome", "Preço", "Unidade", "Estoque", "Mínimo", "Máximo", "Categoria"};
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(colunas, 0);
 
-        for (modelo.Produto p : dao.select()) {
+        for (modelo.Produto p : dao.visualizar()) {
             model.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
@@ -389,7 +389,7 @@ public class ProdutoView extends javax.swing.JFrame {
         p.setMinimo(Double.parseDouble(txtMinimo.getText().replace(",", ".")));
         p.setMaximo(Double.parseDouble(txtMaximo.getText().replace(",", ".")));
         p.setCategoria(getCategoriaSelected());
-        dao.insert(p);
+        dao.inserir(p);
         javax.swing.JOptionPane.showMessageDialog(this, "Produto salvo com sucesso!");
         limparCampos();
         carregarTabela();
@@ -409,7 +409,7 @@ public class ProdutoView extends javax.swing.JFrame {
         p.setMinimo(Double.parseDouble(txtMinimo.getText()));
         p.setMaximo(Double.parseDouble(txtMaximo.getText()));
         p.setCategoria(getCategoriaSelected());
-        dao.update(p);
+        dao.atualizar(p);
         javax.swing.JOptionPane.showMessageDialog(this, "Produto atualizado!");
         limparCampos();
         carregarTabela();
@@ -423,7 +423,7 @@ public class ProdutoView extends javax.swing.JFrame {
         int id = Integer.parseInt(txtId.getText());
         int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja excluir este produto?");
         if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            dao.delete(id);
+            dao.apagar(id);
             javax.swing.JOptionPane.showMessageDialog(this, "Produto excluído!");
             limparCampos();
             carregarTabela();
