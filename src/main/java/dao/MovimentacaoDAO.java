@@ -25,7 +25,7 @@ public class MovimentacaoDAO {
      * @param m Movimentação a ser cadastrada
      * @return boolean Retorna true caso a inserção seja realizada
      */
-    public boolean insert(Movimentacao m) {
+    public boolean inserir(Movimentacao m) {
 
         String sql = "INSERT INTO tb_movimentacao(data_movimentacao, quantidade_movimentada, tipo_movimentacao, tb_produto_id) VALUES(?,?,?,?) ";
 
@@ -55,7 +55,7 @@ public class MovimentacaoDAO {
      * 
      * @return ArrayList Lista de movimentações
      */
-    public ArrayList<Movimentacao> select() {
+    public ArrayList<Movimentacao> visualizar() {
 
         ArrayList<Movimentacao> lista = new ArrayList<>();
 

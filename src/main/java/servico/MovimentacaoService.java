@@ -40,7 +40,7 @@ public class MovimentacaoService {
                             TipoMovimentacao.ENTRADA
                     );
 
-            movimentacaoDAO.insert(movimentacao);
+            movimentacaoDAO.inserir(movimentacao);
 
             System.out.println("Entrada concluída!");
 
@@ -77,7 +77,7 @@ public class MovimentacaoService {
                             TipoMovimentacao.SAIDA
                     );
 
-            movimentacaoDAO.insert(movimentacao);
+            movimentacaoDAO.inserir(movimentacao);
 
             System.out.println("Saida Realizada!");
 

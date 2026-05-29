@@ -298,7 +298,7 @@ public class MovimentacaoView extends JFrame {
             }
         };
 
-        for (Movimentacao m : movimentacaoDAO.select()) {
+        for (Movimentacao m : movimentacaoDAO.visualizar()) {
 
             model.addRow(new Object[]{
                 m.getId(),
