@@ -1,62 +1,78 @@
 package visao;
 
 import dao.RelatorioDAO;
-import java.util.Scanner;
 
-public class RelatorioView {
-    
-    public void menuRelatorios() {
-        
-        Scanner sc = new Scanner(System.in);
-        
-        RelatorioDAO dao = new RelatorioDAO();
-        
-        int opcao;
-        
-        do {
-            
-            System.out.println("\n=== RELATÓRIOS ===");
-            
-            System.out.println("1 - Produtos abaixo do mínimo");
-            
-            System.out.println("2 - Produtos acima do máximo");
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
 
-            System.out.println("3 - Valor total do estoque");
-            
-            System.out.println("0 - Voltar");
-            
-            System.out.println("Escolha: ");
-            
-            opcao = sc.nextInt();
-            
-            switch(opcao) {
-                
-                case 1:
-                    
-                    dao.produtosAbaixoMinimo();
-                    break;
-                
-                case 2:
-                    
-                    dao.produtosAcimaMaximo();
-                    break;
-                
-                case 3:
-                    
-                    dao.valorTotalEstoque();
-                    break;
-                 
-                case 0:
-                    
-                    System.out.println("Voltando...");
-                    break;
-                    
-                default:
-                    
-                    System.out.println("Opção inválida.");
-                    
-            }
-            
-        } while(opcao != 0);
+public class RelatorioView extends JFrame {
+
+    private final RelatorioDAO dao;
+
+    public RelatorioView() {
+
+        dao = new RelatorioDAO();
+
+        setTitle("Relatórios");
+
+        setSize(400, 300);
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        setLocationRelativeTo(null);
+
+        JPanel painel = new JPanel();
+
+        painel.setLayout(new GridLayout(4, 1, 10, 10));
+
+        JButton btnMinimo =
+            new JButton("Produtos abaixo do mínimo");
+
+        JButton btnMaximo =
+            new JButton("Produtos acima do máximo");
+
+        JButton btnValor =
+            new JButton("Valor total do estoque");
+
+        JButton btnSair =
+            new JButton("Fechar");
+
+        painel.add(btnMinimo);
+
+        painel.add(btnMaximo);
+
+        painel.add(btnValor);
+
+        painel.add(btnSair);
+
+        add(painel);
+
+        btnMinimo.addActionListener(e -> {
+
+            dao.produtosAbaixoMinimo();
+
+        });
+
+        btnMaximo.addActionListener(e -> {
+
+            dao.produtosAcimaMaximo();
+
+        });
+
+        btnValor.addActionListener(e -> {
+
+            dao.valorTotalEstoque();
+
+        });
+
+        btnSair.addActionListener(e -> {
+
+            dispose();
+
+        });
+
+        setVisible(true);
     }
 }
