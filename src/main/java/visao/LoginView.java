@@ -1,7 +1,7 @@
 package visao;
 
 import conexao.Conexao;
-import conexao.DatabaseSetup;
+import conexao.ConfiguraBanco;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -146,7 +146,7 @@ public class LoginView extends JFrame {
         lblStatus.setText("Conectando...");
 
         // Cria o banco e tabelas se não existirem
-        DatabaseSetup.inicializar(usuario, senha);
+        ConfiguraBanco.inicializar(usuario, senha);
 
         boolean conectado = Conexao.inicializar(usuario, senha);
 

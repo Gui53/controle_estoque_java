@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DatabaseSetup {
+public class ConfiguraBanco {
 
     public static void inicializar(String user, String password) {
         String url = "jdbc:mysql://localhost:3306/?useTimezone=true&serverTimezone=UTC";
