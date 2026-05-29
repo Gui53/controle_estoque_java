@@ -1,4 +1,4 @@
-package main;
+package principal;
 
 import view.LoginView;
 
