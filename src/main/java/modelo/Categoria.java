@@ -57,15 +57,4 @@ public class Categoria {
         this.embalagem = embalagem;
     }
 
-    /*public boolean insertCategoria(String nome, TipoTamanho tamanho, TipoEmbalagem embalagem) {
-        int id = this.maiorID() + 1;
-        Categoria objeto = new Categoria(nome, tamanho, embalagem);
-        dao.insertCategoria(objeto);
-        return true;
-
-    }
-
-    public int maiorID() {
-        return dao.maiorID();
-    }*/
 }
