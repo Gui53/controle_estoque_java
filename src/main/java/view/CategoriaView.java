@@ -9,7 +9,7 @@ import enums.TipoEmbalagem;
 import enums.TipoTamanho;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Categoria;
+import modelo.Categoria;
 
 /**
  *

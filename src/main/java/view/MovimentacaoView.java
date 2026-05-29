@@ -23,8 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import model.Movimentacao;
-import model.Produto;
+import modelo.Movimentacao;
+import modelo.Produto;
 import service.MovimentacaoService;
 
 /**

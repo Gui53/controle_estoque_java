@@ -2,14 +2,14 @@ package dao;
 
 import conexao.Conexao;
 import java.util.ArrayList;
-import model.Movimentacao;
+import modelo.Movimentacao;
 import enums.TipoMovimentacao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import model.Produto;
+import modelo.Produto;
 
 /**
  * Classe responsável pelas operações de banco de dados

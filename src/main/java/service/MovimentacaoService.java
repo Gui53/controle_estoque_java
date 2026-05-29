@@ -4,8 +4,8 @@ import dao.MovimentacaoDAO;
 import dao.ProdutoDAO;
 import enums.TipoMovimentacao;
 import java.time.LocalDate;
-import model.Movimentacao;
-import model.Produto;
+import modelo.Movimentacao;
+import modelo.Produto;
 
 /**
  * Classe responsável pelas regras de negócio

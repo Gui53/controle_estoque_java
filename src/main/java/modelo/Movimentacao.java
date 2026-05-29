@@ -1,4 +1,4 @@
-package model;
+package modelo;
 
 import enums.TipoMovimentacao;
 import java.time.LocalDate;

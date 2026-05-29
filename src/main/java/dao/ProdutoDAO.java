@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.Categoria;
-import model.Produto;
+import modelo.Categoria;
+import modelo.Produto;
 
 public class ProdutoDAO {
 

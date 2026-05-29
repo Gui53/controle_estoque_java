@@ -17,7 +17,7 @@ public class ProdutoView extends javax.swing.JFrame {
         String[] colunas = {"ID", "Nome", "Preço", "Unidade", "Estoque", "Mínimo", "Máximo", "Categoria"};
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(colunas, 0);
 
-        for (model.Produto p : dao.select()) {
+        for (modelo.Produto p : dao.select()) {
             model.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
@@ -34,7 +34,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void carregarCategorias() {
         cbCategoria.removeAllItems();
-        for (model.Categoria c : categoriaDAO.select()) {
+        for (modelo.Categoria c : categoriaDAO.select()) {
             cbCategoria.addItem(c.getNome() + "|" + c.getId());
         }
         cbCategoria.setSelectedIndex(-1);
@@ -119,7 +119,7 @@ public class ProdutoView extends javax.swing.JFrame {
         getContentPane().add(pnlHeader, java.awt.BorderLayout.NORTH);
     }
 
-    private model.Categoria getCategoriaSelected() {
+    private modelo.Categoria getCategoriaSelected() {
         if (cbCategoria.getSelectedItem() == null) {
             return null;
         }
@@ -381,7 +381,7 @@ public class ProdutoView extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione a unidade e a categoria.");
             return;
         }
-        model.Produto p = new model.Produto();
+        modelo.Produto p = new modelo.Produto();
         p.setNome(nome);
         p.setPreco(Double.parseDouble(txtPreco.getText().replace(",", ".")));
         p.setUnidade(enums.TipoUnidade.valueOf(cbUnidade.getSelectedItem().toString()));
@@ -400,7 +400,7 @@ public class ProdutoView extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela.");
             return;
         }
-        model.Produto p = new model.Produto();
+        modelo.Produto p = new modelo.Produto();
         p.setId(Integer.parseInt(txtId.getText()));
         p.setNome(txtNome.getText().trim());
         p.setPreco(Double.parseDouble(txtPreco.getText()));
