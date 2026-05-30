@@ -4,71 +4,81 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conexao.Conexao;
+import java.util.ArrayList;
+import modelo.Produto;
 
 public class RelatorioDAO {
     
-    public void produtosAbaixoMinimo(){
-    
-      String sql = """
-                SELECT nome, quantidade, minimo
-                FROM produto
-                WHERE quantidade < minimo
-            """;
-        
+    public ArrayList<Produto> produtosAbaixoMinimo() {
+
+        ArrayList<Produto> lista = new ArrayList<>();
+
+        String sql = """
+            SELECT *
+            FROM produto
+            WHERE quantidade < minimo
+        """;
+
         try (
-                Connection conn = Conexao.getConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()
-                ){
-            System.out.println("\n=== PRODUTOS ABAIXO DO MÍNIMO ===");
-            
+            Connection conn = Conexao.getConexao();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()
+        ) {
+
             while(rs.next()) {
-                System.out.println(
-                    rs.getString("nome")
-                    + " | Quantidade: "
-                    + rs.getInt("quantidade")
-                    + " | Mínimo: "
-                    + rs.getInt("minimo")
-                );                                   
+
+                Produto p = new Produto();
+
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setQuantidade(rs.getDouble("quantidade"));
+                p.setMinimo(rs.getDouble("minimo"));
+
+                lista.add(p);
             }
+
         } catch(Exception e) {
-;            e.printStackTrace();
-        }
- 
+            e.printStackTrace();
     }
+
+    return lista;
+}
     
-    public void produtosAcimaMaximo(){
+    public ArrayList<Produto> produtosAcimaMaximo(){
+        
+        ArrayList<Produto> lista = new ArrayList<>();
         
         String sql = """
-            SELECT nome, quantidade, maximo
+            SELECT *
             FROM produto
             WHERE quantidade > maximo
         """;
         
         try (
-                Connection conn = Conexao.getConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()
+            Connection conn = Conexao.getConexao();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()
         ) {
-            
-            System.out.println("\n=== PRODUTO ACIMA DO MÁXIMO ===");
-            
+                                    
             while(rs.next()) {
-                System.out.println(
-                    rs.getString("nome")
-                    + " | Quantidade: "
-                    + rs.getInt("quantidade")
-                    + " | Máximo: "
-                    + rs.getInt("maximo")
-                );
+                
+                Produto p = new Produto();
+                
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setQuantidade(rs.getDouble("quantidade"));
+                p.setMaximo(rs.getDouble("maximo"));
+                
+                lista.add(p);      
             }
         } catch(Exception e) {
             e.printStackTrace();
         }
-
+        
+        return lista;
     }
     
-    public void valorTotalEstoque() {
+    public double valorTotalEstoque() {
         
         String sql = """
             SELECT SUM(preco * quantidade) AS total
@@ -76,22 +86,19 @@ public class RelatorioDAO {
         """;
         
         try (
-                Connection conn = Conexao.getConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()
+            Connection conn = Conexao.getConexao();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()
         ) {
             
             if(rs.next()) {
-                System.out.println(
-                        "\nValor total do estoque: R$ "
-                        + rs.getDouble("total")
-                );                                             
+                return rs.getDouble("total");                                             
             }
+            
         } catch(Exception e) {
             e.printStackTrace();                                                                                                
         }
-
-    } 
-    
-    
+        
+        return 0;
+    }     
 }
