@@ -5,8 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Classe responsável por criar o banco de dados e as tabelas do sistema caso
+ * ainda não existam.
+ *
+ * @author Gabriel Conci
+ * @see java.sql.Connection
+ */
 public class ConfiguraBanco {
 
+    /**
+     * Inicializa o banco de dados e cria as tabelas necessárias caso ainda não
+     * existam.
+     *
+     * @param user Usuário do banco de dados
+     * @param password Senha do banco de dados
+     */
     public static void inicializar(String user, String password) {
         String url = "jdbc:mysql://localhost:3306/?useTimezone=true&serverTimezone=UTC";
 
