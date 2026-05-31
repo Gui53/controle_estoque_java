@@ -8,15 +8,27 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
 
 /**
+ * Tela responsável pelo gerenciamento das categorias do sistema.
+ *
+ * Permite cadastrar, visualizar, atualizar e excluir categorias, além de exibir
+ * os dados em uma tabela interativa.
  *
  * @author Gabriel Conci
+ * @see javax.swing.JFrame
  */
 public class CategoriaView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CategoriaView.class.getName());
 
+    /**
+     * Objeto DAO responsável pelas operações de banco de dados relacionadas às
+     * categorias.
+     */
     private CategoriaDAO dao = new CategoriaDAO();
 
+    /**
+     * Carrega as categorias cadastradas na tabela.
+     */
     private void carregarTabela() {
         String[] colunas = {"ID", "Nome", "Tamanho", "Embalagem"};
         DefaultTableModel model = new DefaultTableModel(colunas, 0);
@@ -32,6 +44,9 @@ public class CategoriaView extends javax.swing.JFrame {
         tblCategorias.setModel(model);
     }
 
+    /**
+     * Limpa os campos do formulário.
+     */
     private void limparCampos() {
         txtId.setText("");
         txtNome.setText("");
@@ -40,7 +55,8 @@ public class CategoriaView extends javax.swing.JFrame {
     }
 
     /**
-     * Creates new form CategoriaView
+     * Construtor da tela de categorias. Inicializa e organiza os componentes
+     * visuais.
      */
     public CategoriaView() {
         initComponents();
@@ -248,7 +264,11 @@ public class CategoriaView extends javax.swing.JFrame {
     private void cbTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTamanhoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTamanhoActionPerformed
-
+    /**
+     * Salva uma nova categoria no banco de dados.
+     *
+     * @param evt Evento de clique do botão
+     */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         String nome = txtNome.getText().trim();
         if (nome.isEmpty()) {
@@ -264,6 +284,11 @@ public class CategoriaView extends javax.swing.JFrame {
         limparCampos();
         carregarTabela();
     }//GEN-LAST:event_btnSalvarActionPerformed
+    /**
+     * Atualiza os dados de uma categoria selecionada na tabela.
+     *
+     * @param evt Evento de clique do botão
+     */
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         if (txtId.getText().isEmpty()) {
@@ -281,7 +306,11 @@ public class CategoriaView extends javax.swing.JFrame {
         limparCampos();
         carregarTabela();
     }//GEN-LAST:event_btnAtualizarActionPerformed
-
+    /**
+     * Remove uma categoria selecionada na tabela após confirmação.
+     *
+     * @param evt Evento de clique do botão
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (txtId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Selecione uma categoria na tabela.");
@@ -296,11 +325,19 @@ public class CategoriaView extends javax.swing.JFrame {
             carregarTabela();
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
-
+    /**
+     * Limpa os campos do formulário ao clicar no botão Limpar.
+     *
+     * @param evt Evento de clique do botão
+     */
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
-
+    /**
+     * Preenche os campos do formulário ao clicar em uma linha da tabela.
+     *
+     * @param evt Evento de clique do mouse
+     */
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
         int linha = tblCategorias.getSelectedRow();
         if (linha >= 0) {
@@ -336,11 +373,12 @@ public class CategoriaView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new CategoriaView().setVisible(true));
     }
 
+    /**
+     * Aplica estilização personalizada nos componentes da tela.
+     */
     private void estilizarTela() {
-        // Fundo da janela
         getContentPane().setBackground(new java.awt.Color(240, 236, 228));
 
-        // Botão Salvar — verde
         btnSalvar.setBackground(new java.awt.Color(45, 158, 95));
         btnSalvar.setForeground(java.awt.Color.WHITE);
         btnSalvar.setFocusPainted(false);
@@ -348,7 +386,6 @@ public class CategoriaView extends javax.swing.JFrame {
         btnSalvar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        // Botão Atualizar — azul
         btnAtualizar.setBackground(new java.awt.Color(45, 107, 191));
         btnAtualizar.setForeground(java.awt.Color.WHITE);
         btnAtualizar.setFocusPainted(false);
@@ -356,7 +393,6 @@ public class CategoriaView extends javax.swing.JFrame {
         btnAtualizar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
         btnAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        // Botão Excluir — vermelho
         btnExcluir.setBackground(new java.awt.Color(192, 57, 43));
         btnExcluir.setForeground(java.awt.Color.WHITE);
         btnExcluir.setFocusPainted(false);
@@ -364,7 +400,6 @@ public class CategoriaView extends javax.swing.JFrame {
         btnExcluir.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
         btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        // Botão Limpar — cinza
         btnLimpar.setBackground(new java.awt.Color(130, 130, 130));
         btnLimpar.setForeground(java.awt.Color.WHITE);
         btnLimpar.setFocusPainted(false);
@@ -372,22 +407,17 @@ public class CategoriaView extends javax.swing.JFrame {
         btnLimpar.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 13));
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        // Cabeçalho da tabela — azul escuro
         tblCategorias.getTableHeader().setBackground(new java.awt.Color(45, 53, 97));
         tblCategorias.getTableHeader().setForeground(java.awt.Color.WHITE);
         tblCategorias.getTableHeader().setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
-
-        // Linhas da tabela
         tblCategorias.setRowHeight(28);
         tblCategorias.setFont(new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 13));
         tblCategorias.setGridColor(new java.awt.Color(220, 215, 205));
         tblCategorias.setSelectionBackground(new java.awt.Color(208, 232, 255));
         tblCategorias.setSelectionForeground(new java.awt.Color(30, 30, 30));
 
-        // Título da janela
         setTitle("Gerenciar Categorias");
 
-        // Cabeçalho
         javax.swing.JPanel pnlHeader = new javax.swing.JPanel();
         pnlHeader.setBackground(new java.awt.Color(45, 53, 97));
         pnlHeader.setPreferredSize(new java.awt.Dimension(getWidth(), 50));
