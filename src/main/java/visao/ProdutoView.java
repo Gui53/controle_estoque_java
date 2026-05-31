@@ -1,14 +1,30 @@
 package visao;
 
 /**
+ * Tela responsável pelo gerenciamento dos produtos do sistema.
+ *
+ * Permite cadastrar, visualizar, atualizar, excluir produtos e reajustar
+ * preços, além de exibir os dados em uma tabela interativa.
  *
  * @author Gabriel Conci
+ * @see javax.swing.JFrame
  */
 public class ProdutoView extends javax.swing.JFrame {
 
+    /**
+     * Objeto DAO responsável pelas operações de banco de dados relacionadas aos
+     * produtos.
+     */
     private dao.ProdutoDAO dao = new dao.ProdutoDAO();
+    /**
+     * Objeto DAO responsável pelas operações de banco de dados relacionadas às
+     * categorias.
+     */
     private dao.CategoriaDAO categoriaDAO = new dao.CategoriaDAO();
 
+    /**
+     * Carrega os produtos cadastrados na tabela.
+     */
     private void carregarTabela() {
         String[] colunas = {"ID", "Nome", "Preço", "Unidade", "Estoque", "Mínimo", "Máximo", "Categoria"};
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(colunas, 0);
@@ -28,6 +44,9 @@ public class ProdutoView extends javax.swing.JFrame {
         tblProdutos.setModel(model);
     }
 
+    /**
+     * Carrega as categorias cadastradas no ComboBox.
+     */
     private void carregarCategorias() {
         cbCategoria.removeAllItems();
         for (modelo.Categoria c : categoriaDAO.visualizar()) {
@@ -50,6 +69,9 @@ public class ProdutoView extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Limpa os campos do formulário.
+     */
     private void limparCampos() {
         txtId.setText("");
         txtNome.setText("");
@@ -61,6 +83,9 @@ public class ProdutoView extends javax.swing.JFrame {
         cbCategoria.setSelectedIndex(-1);
     }
 
+    /**
+     * Aplica estilização personalizada nos componentes da tela.
+     */
     private void estilizarTela() {
         getContentPane().setBackground(new java.awt.Color(240, 236, 228));
 
@@ -115,6 +140,11 @@ public class ProdutoView extends javax.swing.JFrame {
         getContentPane().add(pnlHeader, java.awt.BorderLayout.NORTH);
     }
 
+    /**
+     * Recupera a categoria selecionada no ComboBox.
+     *
+     * @return Categoria selecionada ou null caso nenhuma esteja selecionada
+     */
     private modelo.Categoria getCategoriaSelected() {
         if (cbCategoria.getSelectedItem() == null) {
             return null;
@@ -366,7 +396,11 @@ public class ProdutoView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Salva um novo produto no banco de dados.
+     *
+     * @param evt Evento de clique do botão
+     */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         String nome = txtNome.getText().trim();
         if (nome.isEmpty()) {
@@ -390,7 +424,11 @@ public class ProdutoView extends javax.swing.JFrame {
         limparCampos();
         carregarTabela();
     }//GEN-LAST:event_btnSalvarActionPerformed
-
+    /**
+     * Atualiza os dados de um produto selecionado na tabela.
+     *
+     * @param evt Evento de clique do botão
+     */
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         if (txtId.getText().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela.");
@@ -410,7 +448,11 @@ public class ProdutoView extends javax.swing.JFrame {
         limparCampos();
         carregarTabela();
     }//GEN-LAST:event_btnAtualizarActionPerformed
-
+    /**
+     * Remove um produto selecionado na tabela após confirmação.
+     *
+     * @param evt Evento de clique do botão
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (txtId.getText().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela.");
@@ -425,11 +467,19 @@ public class ProdutoView extends javax.swing.JFrame {
             carregarTabela();
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
-
+    /**
+     * Limpa os campos do formulário ao clicar no botão Limpar.
+     *
+     * @param evt Evento de clique do botão
+     */
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
-
+    /**
+     * Reajusta o preço de todos os produtos pelo percentual informado.
+     *
+     * @param evt Evento de clique do botão
+     */
     private void btnReajustarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReajustarActionPerformed
         String valor = txtPercentual.getText().replace(",", ".").trim();
         if (valor.isEmpty()) {
