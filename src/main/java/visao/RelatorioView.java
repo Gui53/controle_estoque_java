@@ -19,12 +19,37 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Produto;
 
+/**
+ * Tela responsável pela exibição dos relatórios do sistema.
+ *
+ * Permite visualizar lista de preços, balanço físico/financeiro,
+ * produtos abaixo do mínimo, quantidade por categoria e
+ * produto com maior entrada e saída.
+ *
+ * @author Gabriel Conci
+ * @see javax.swing.JFrame
+ */
 public class RelatorioView extends JFrame {
 
+    /**
+     * Objeto DAO responsável pelas consultas de relatórios.
+     */
     private final RelatorioDAO dao = new RelatorioDAO();
+
+    /**
+     * Tabela responsável por exibir os dados dos relatórios.
+     */
     private JTable tabela;
+
+    /**
+     * Label responsável por exibir totais e mensagens no rodapé.
+     */
     private JLabel lblTotalEstoque;
 
+    /**
+     * Construtor da tela de relatórios.
+     * Inicializa e organiza os componentes visuais.
+     */
     public RelatorioView() {
         setTitle("Relatórios");
         setSize(800, 580);
@@ -37,6 +62,11 @@ public class RelatorioView extends JFrame {
         add(criarPainelTabela(), BorderLayout.CENTER);
     }
 
+    /**
+     * Cria o cabeçalho da tela.
+     *
+     * @return JPanel Painel do cabeçalho
+     */
     private JPanel criarHeader() {
         JPanel pnl = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 12));
         pnl.setBackground(new Color(45, 53, 97));
@@ -49,6 +79,12 @@ public class RelatorioView extends JFrame {
         return pnl;
     }
 
+    /**
+     * Cria o painel lateral com os botões de navegação
+     * entre os relatórios disponíveis.
+     *
+     * @return JPanel Painel com os botões
+     */
     private JPanel criarPainelBotoes() {
         JPanel pnl = new JPanel(new java.awt.GridLayout(6, 1, 8, 8));
         pnl.setBackground(new Color(45, 53, 97));
@@ -80,6 +116,12 @@ public class RelatorioView extends JFrame {
         return pnl;
     }
 
+    /**
+     * Cria o painel central contendo a tabela de exibição
+     * dos dados e o rodapé com totais e mensagens.
+     *
+     * @return JPanel Painel com a tabela
+     */
     private JPanel criarPainelTabela() {
         JPanel pnl = new JPanel(new BorderLayout());
         pnl.setBackground(new Color(240, 236, 228));
@@ -100,6 +142,11 @@ public class RelatorioView extends JFrame {
         return pnl;
     }
 
+    /**
+     * Exibe o relatório de lista de preços na tabela.
+     * Mostra nome, preço unitário, unidade e categoria
+     * de todos os produtos em ordem alfabética.
+     */
     private void mostrarListaPrecos() {
         String[] colunas = {"Nome", "Preço Unitário (R$)", "Unidade", "Categoria"};
         DefaultTableModel model = new DefaultTableModel(colunas, 0);
@@ -117,6 +164,11 @@ public class RelatorioView extends JFrame {
         lblTotalEstoque.setText(" ");
     }
 
+    /**
+     * Exibe o relatório de balanço físico e financeiro na tabela.
+     * Mostra nome, quantidade, preço unitário e total por produto,
+     * além do valor total geral do estoque no rodapé.
+     */
     private void mostrarBalanco() {
         String[] colunas = {"Nome", "Qtd. em Estoque", "Preço Unitário (R$)", "Total (R$)"};
         DefaultTableModel model = new DefaultTableModel(colunas, 0);
@@ -135,6 +187,11 @@ public class RelatorioView extends JFrame {
                 String.format("%.2f", dao.valorTotalEstoque()));
     }
 
+    /**
+     * Exibe o relatório de produtos abaixo da quantidade mínima.
+     * Mostra nome, quantidade atual e quantidade mínima de cada produto,
+     * além da contagem total no rodapé.
+     */
     private void mostrarAbaixoMinimo() {
         String[] colunas = {"Nome", "Qtd. em Estoque", "Qtd. Mínima"};
         DefaultTableModel model = new DefaultTableModel(colunas, 0);
@@ -158,6 +215,11 @@ public class RelatorioView extends JFrame {
         }
     }
 
+    /**
+     * Exibe o relatório de quantidade de produtos por categoria.
+     * Mostra o nome de cada categoria e a quantidade
+     * de produtos distintos cadastrados nela.
+     */
     private void mostrarPorCategoria() {
         String[] colunas = {"Categoria", "Qtd. de Produtos"};
         DefaultTableModel model = new DefaultTableModel(colunas, 0);
@@ -170,6 +232,11 @@ public class RelatorioView extends JFrame {
         lblTotalEstoque.setText(" ");
     }
 
+    /**
+     * Exibe o relatório do produto com maior entrada
+     * e maior saída nas movimentações de estoque.
+     * Exibe aviso caso não haja movimentações registradas.
+     */
     private void mostrarMaiorEntradaSaida() {
         Object[] resultado = dao.produtoMaiorEntradaSaida();
 
@@ -196,6 +263,12 @@ public class RelatorioView extends JFrame {
         lblTotalEstoque.setText(" ");
     }
 
+    /**
+     * Cria e estiliza um botão padronizado para o painel lateral.
+     *
+     * @param texto Texto a ser exibido no botão
+     * @return JButton Botão estilizado
+     */
     private JButton criarBotao(String texto) {
         JButton btn = new JButton(texto);
         btn.setBackground(new Color(60, 72, 120));
@@ -207,6 +280,11 @@ public class RelatorioView extends JFrame {
         return btn;
     }
 
+    /**
+     * Aplica estilização personalizada em uma tabela.
+     *
+     * @param t Tabela a ser estilizada
+     */
     private void estilizarTabela(JTable t) {
         t.getTableHeader().setBackground(new Color(45, 53, 97));
         t.getTableHeader().setForeground(Color.WHITE);
