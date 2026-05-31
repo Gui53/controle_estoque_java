@@ -7,8 +7,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Produto;
 
+/**
+ * Classe responsável pelas operações de banco de dados relacionadas aos
+ * relatórios do sistema.
+ *
+ * @author Gabriel Conci
+ * @see java.sql.Connection
+ */
 public class RelatorioDAO {
 
+    /**
+     * Recupera todos os produtos em ordem alfabética para exibição na lista de
+     * preços.
+     *
+     * @return ArrayList Lista de produtos com nome, preço, unidade e categoria
+     */
     public ArrayList<Produto> listaDePrecos() {
         ArrayList<Produto> lista = new ArrayList<>();
         String sql = """
@@ -26,9 +39,11 @@ public class RelatorioDAO {
                 p.setNome(rs.getString("nome"));
                 p.setPreco(rs.getDouble("preco_unitario"));
                 p.setUnidade(enums.TipoUnidade.valueOf(rs.getString("unidade")));
+
                 modelo.Categoria cat = new modelo.Categoria();
                 cat.setNome(rs.getString("categoria"));
                 p.setCategoria(cat);
+
                 lista.add(p);
             }
             rs.close();
@@ -39,6 +54,13 @@ public class RelatorioDAO {
         return lista;
     }
 
+    /**
+     * Recupera todos os produtos com suas quantidades e valores para exibição
+     * no balanço físico e financeiro.
+     *
+     * @return ArrayList Lista de arrays contendo nome, quantidade, preço
+     * unitário e total por produto
+     */
     public ArrayList<Object[]> balanco() {
         ArrayList<Object[]> lista = new ArrayList<>();
         String sql = """
@@ -66,6 +88,11 @@ public class RelatorioDAO {
         return lista;
     }
 
+    /**
+     * Calcula o valor total de todos os produtos em estoque.
+     *
+     * @return double Valor total do estoque
+     */
     public double valorTotalEstoque() {
         String sql = "SELECT SUM(preco_unitario * quantidade_estoque) AS total FROM tb_produto";
         try {
@@ -82,6 +109,12 @@ public class RelatorioDAO {
         return 0;
     }
 
+    /**
+     * Recupera todos os produtos cuja quantidade em estoque está abaixo da
+     * quantidade mínima cadastrada.
+     *
+     * @return ArrayList Lista de produtos abaixo do mínimo
+     */
     public ArrayList<Produto> produtosAbaixoMinimo() {
         ArrayList<Produto> lista = new ArrayList<>();
         String sql = """
@@ -108,6 +141,12 @@ public class RelatorioDAO {
         return lista;
     }
 
+    /**
+     * Recupera a quantidade de produtos distintos por categoria.
+     *
+     * @return ArrayList Lista de arrays contendo nome da categoria e quantidade
+     * de produtos
+     */
     public ArrayList<Object[]> produtosPorCategoria() {
         ArrayList<Object[]> lista = new ArrayList<>();
         String sql = """
@@ -134,8 +173,15 @@ public class RelatorioDAO {
         return lista;
     }
 
+    /**
+     * Recupera o produto com maior total de entradas e o produto com maior
+     * total de saídas nas movimentações de estoque.
+     *
+     * @return Object[] Array com nome e total do produto de maior entrada nos
+     * índices 0 e 1, e nome e total do produto de maior saída nos índices 2 e 3
+     */
     public Object[] produtoMaiorEntradaSaida() {
-        Object[] resultado = new Object[4]; // nomeMaiorEntrada, totalEntrada, nomeMaiorSaida, totalSaida
+        Object[] resultado = new Object[4];
         String sqlEntrada = """
             SELECT p.nome, SUM(m.quantidade_movimentada) AS total
             FROM tb_movimentacao m
