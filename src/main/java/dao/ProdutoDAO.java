@@ -10,8 +10,21 @@ import java.util.ArrayList;
 import modelo.Categoria;
 import modelo.Produto;
 
+/**
+ * Classe responsável pelas operações de banco de dados relacionadas aos
+ * produtos.
+ *
+ * @author Gabriel Conci
+ * @see java.sql.Connection
+ */
 public class ProdutoDAO {
 
+    /**
+     * Insere um produto no banco de dados.
+     *
+     * @param produto Produto a ser cadastrado
+     * @return boolean Retorna true caso a inserção seja realizada
+     */
     public boolean inserir(Produto produto) {
         String sql = """
                 INSERT INTO tb_produto(nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, tb_categoria_id)
@@ -42,6 +55,11 @@ public class ProdutoDAO {
         }
     }
 
+    /**
+     * Recupera todos os produtos cadastrados no banco de dados.
+     *
+     * @return ArrayList Lista de produtos
+     */
     public ArrayList<Produto> visualizar() {
         ArrayList<Produto> lista = new ArrayList<>();
 
@@ -63,6 +81,12 @@ public class ProdutoDAO {
         return lista;
     }
 
+    /**
+     * Remove um produto do banco de dados pelo seu identificador.
+     *
+     * @param id Identificador do produto a ser removido
+     * @return boolean Retorna true caso a remoção seja realizada
+     */
     public boolean apagar(int id) {
         String sql = "DELETE FROM tb_produto WHERE id = ?";
 
@@ -80,6 +104,13 @@ public class ProdutoDAO {
         }
     }
 
+    /**
+     * Monta um objeto Produto a partir do resultado de uma query.
+     *
+     * @param res ResultSet com os dados do produto
+     * @return Produto Objeto montado com os dados do banco
+     * @throws SQLException Caso ocorra erro na leitura do ResultSet
+     */
     private Produto montarProduto(ResultSet res) throws SQLException {
         Produto produto = new Produto();
 
@@ -99,6 +130,12 @@ public class ProdutoDAO {
         return produto;
     }
 
+    /**
+     * Recupera um produto pelo seu identificador.
+     *
+     * @param id Identificador do produto
+     * @return Produto Produto encontrado ou objeto vazio caso não exista
+     */
     public Produto selecionarPorId(int id) {
         Produto produto = new Produto();
 
@@ -122,6 +159,12 @@ public class ProdutoDAO {
         return produto;
     }
 
+    /**
+     * Atualiza os dados de um produto no banco de dados.
+     *
+     * @param produto Produto com os dados atualizados
+     * @return boolean Retorna true caso a atualização seja realizada
+     */
     public boolean atualizar(Produto produto) {
 
         String sql = """
@@ -143,29 +186,29 @@ public class ProdutoDAO {
             stmt.setString(1, produto.getNome());
             stmt.setDouble(2, produto.getPreco());
             stmt.setString(3, produto.getUnidade().name());
-
             stmt.setDouble(4, produto.getQuantidade());
             stmt.setDouble(5, produto.getMinimo());
             stmt.setDouble(6, produto.getMaximo());
-
             stmt.setInt(7, produto.getCategoria().getId());
-
             stmt.setInt(8, produto.getId());
 
             stmt.executeUpdate();
-
             stmt.close();
 
             return true;
 
         } catch (SQLException e) {
-
             System.out.println("Erro: " + e);
-
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Atualiza apenas a quantidade em estoque de um produto.
+     *
+     * @param produto Produto com a quantidade atualizada
+     * @return boolean Retorna true caso a atualização seja realizada
+     */
     public boolean atualizarQuantidade(Produto produto) {
         String sql = """
                 UPDATE tb_produto
@@ -188,6 +231,13 @@ public class ProdutoDAO {
         }
     }
 
+    /**
+     * Reajusta o preço de todos os produtos cadastrados de acordo com o
+     * percentual informado.
+     *
+     * @param percentual Percentual de reajuste a ser aplicado
+     * @return boolean Retorna true caso o reajuste seja realizado
+     */
     public boolean reajustarPrecos(double percentual) {
         String sql = "UPDATE tb_produto SET preco_unitario = preco_unitario * (1 + ? / 100)";
 
