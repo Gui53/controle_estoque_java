@@ -9,7 +9,6 @@ import modelo.Produto;
 
 public class RelatorioDAO {
 
-    
     public ArrayList<Produto> listaDePrecos() {
         ArrayList<Produto> lista = new ArrayList<>();
         String sql = """
@@ -27,6 +26,9 @@ public class RelatorioDAO {
                 p.setNome(rs.getString("nome"));
                 p.setPreco(rs.getDouble("preco_unitario"));
                 p.setUnidade(enums.TipoUnidade.valueOf(rs.getString("unidade")));
+                modelo.Categoria cat = new modelo.Categoria();
+                cat.setNome(rs.getString("categoria"));
+                p.setCategoria(cat);
                 lista.add(p);
             }
             rs.close();
@@ -37,7 +39,6 @@ public class RelatorioDAO {
         return lista;
     }
 
-   
     public ArrayList<Object[]> balanco() {
         ArrayList<Object[]> lista = new ArrayList<>();
         String sql = """
@@ -65,13 +66,14 @@ public class RelatorioDAO {
         return lista;
     }
 
-    
     public double valorTotalEstoque() {
         String sql = "SELECT SUM(preco_unitario * quantidade_estoque) AS total FROM tb_produto";
         try {
             Statement stmt = Conexao.getConexao().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            if (rs.next()) return rs.getDouble("total");
+            if (rs.next()) {
+                return rs.getDouble("total");
+            }
             rs.close();
             stmt.close();
         } catch (Exception e) {
@@ -80,7 +82,6 @@ public class RelatorioDAO {
         return 0;
     }
 
-    
     public ArrayList<Produto> produtosAbaixoMinimo() {
         ArrayList<Produto> lista = new ArrayList<>();
         String sql = """
@@ -107,7 +108,6 @@ public class RelatorioDAO {
         return lista;
     }
 
-    
     public ArrayList<Object[]> produtosPorCategoria() {
         ArrayList<Object[]> lista = new ArrayList<>();
         String sql = """
@@ -134,7 +134,6 @@ public class RelatorioDAO {
         return lista;
     }
 
-    
     public Object[] produtoMaiorEntradaSaida() {
         Object[] resultado = new Object[4]; // nomeMaiorEntrada, totalEntrada, nomeMaiorSaida, totalSaida
         String sqlEntrada = """
