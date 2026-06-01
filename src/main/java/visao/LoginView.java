@@ -18,13 +18,45 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+/**
+ * Tela responsável pela autenticação e conexão com o banco de dados.
+ *
+ * Permite ao usuário informar as credenciais necessárias para acessar o
+ * sistema. Após a validação das informações, o banco de dados é inicializado
+ * e a tela principal é exibida.
+ *
+ * @author Gabriel Conci
+ * @version 1.0
+ * @since 2026
+ * @see PrincipalView
+ * @see Conexao
+ * @see ConfiguraBanco
+ */
 public class LoginView extends JFrame {
 
+    /**
+     * Campo para digitação do usuário do banco de dados.
+     */
     private JTextField txtUsuario;
+
+    /**
+     * Campo para digitação da senha do banco de dados.
+     */
     private JPasswordField txtSenha;
+
+    /**
+     * Botão responsável por iniciar o processo de conexão.
+     */
     private JButton btnConectar;
+
+    /**
+     * Rótulo utilizado para exibir mensagens de status ao usuário.
+     */
     private JLabel lblStatus;
 
+    /**
+     * Constrói a tela de login e configura seus componentes visuais.
+     */
     public LoginView() {
         setTitle("Conexão com o Banco de Dados");
         setSize(420, 340);
@@ -37,6 +69,11 @@ public class LoginView extends JFrame {
         add(criarFormulario(), BorderLayout.CENTER);
     }
 
+    /**
+     * Cria o cabeçalho da interface contendo título e descrição.
+     *
+     * @return JPanel contendo os componentes do cabeçalho.
+     */
     private JPanel criarHeader() {
         JPanel pnlHeader = new JPanel();
         pnlHeader.setBackground(new Color(45, 53, 97));
@@ -58,9 +95,18 @@ public class LoginView extends JFrame {
         pnlTextos.add(lblSub);
 
         pnlHeader.add(pnlTextos);
+
         return pnlHeader;
     }
 
+    /**
+     * Cria o formulário principal da tela de login.
+     *
+     * Contém os campos de usuário, senha, status da conexão e botão
+     * para autenticação.
+     *
+     * @return JPanel contendo o formulário de login.
+     */
     private JPanel criarFormulario() {
         JPanel pnl = new JPanel(new GridBagLayout());
         pnl.setBackground(new Color(240, 236, 228));
@@ -74,38 +120,30 @@ public class LoginView extends JFrame {
         Font fontLabel = new Font("SansSerif", Font.BOLD, 12);
         Font fontCampo = new Font("SansSerif", Font.PLAIN, 13);
 
-        // Usuário
         gbc.gridx = 0;
         gbc.gridy = 0;
         JLabel lblUsuario = new JLabel("Usuário:");
         lblUsuario.setFont(fontLabel);
         pnl.add(lblUsuario, gbc);
 
-        gbc.gridx = 0;
         gbc.gridy = 1;
         txtUsuario = new JTextField("root");
         txtUsuario.setFont(fontCampo);
         txtUsuario.setPreferredSize(new Dimension(300, 34));
         pnl.add(txtUsuario, gbc);
 
-        // Senha
-        gbc.gridx = 0;
         gbc.gridy = 2;
         JLabel lblSenha = new JLabel("Senha:");
         lblSenha.setFont(fontLabel);
         pnl.add(lblSenha, gbc);
 
-        gbc.gridx = 0;
         gbc.gridy = 3;
         txtSenha = new JPasswordField();
         txtSenha.setFont(fontCampo);
         txtSenha.setPreferredSize(new Dimension(300, 34));
-        // Conecta ao pressionar Enter
         txtSenha.addActionListener(e -> conectar());
         pnl.add(txtSenha, gbc);
 
-        // Status
-        gbc.gridx = 0;
         gbc.gridy = 4;
         lblStatus = new JLabel(" ");
         lblStatus.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -113,11 +151,10 @@ public class LoginView extends JFrame {
         lblStatus.setHorizontalAlignment(JLabel.CENTER);
         pnl.add(lblStatus, gbc);
 
-        // Botão
-        gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
+
         btnConectar = new JButton("🔌 Conectar");
         btnConectar.setBackground(new Color(45, 158, 95));
         btnConectar.setForeground(Color.WHITE);
@@ -127,11 +164,19 @@ public class LoginView extends JFrame {
         btnConectar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnConectar.setPreferredSize(new Dimension(180, 38));
         btnConectar.addActionListener(e -> conectar());
+
         pnl.add(btnConectar, gbc);
 
         return pnl;
     }
 
+    /**
+     * Realiza a validação das credenciais e tenta estabelecer
+     * conexão com o banco de dados.
+     *
+     * Caso a conexão seja bem-sucedida, a tela principal do sistema
+     * é exibida. Caso contrário, uma mensagem de erro é apresentada.
+     */
     private void conectar() {
         String usuario = txtUsuario.getText().trim();
         String senha = new String(txtSenha.getPassword());
@@ -145,7 +190,6 @@ public class LoginView extends JFrame {
         lblStatus.setForeground(new Color(45, 107, 191));
         lblStatus.setText("Conectando...");
 
-        // Cria o banco e tabelas se não existirem
         ConfiguraBanco.inicializar(usuario, senha);
 
         boolean conectado = Conexao.inicializar(usuario, senha);
@@ -153,8 +197,10 @@ public class LoginView extends JFrame {
         if (conectado) {
             lblStatus.setForeground(new Color(45, 158, 95));
             lblStatus.setText("✅ Conectado com sucesso!");
+
             new PrincipalView().setVisible(true);
             dispose();
+
         } else {
             lblStatus.setForeground(new Color(192, 57, 43));
             lblStatus.setText("❌ Falha na conexão. Verifique as credenciais.");
