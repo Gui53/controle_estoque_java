@@ -161,7 +161,7 @@ O sistema deve impedir movimentações que resultem em estoque negativo.
 
 1. Clone o repositório:
 
-git clone https://github.com/seu-usuario/controle_estoque_java.git
+git clone https://github.com/Gui53/controle_estoque_java.git
 
 2. Abra o projeto no NetBeans
 
